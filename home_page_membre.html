@@ -7,14 +7,15 @@
 
 	<body>
 		<h2><center>SurvEye</center></h2>
-		<input type="hidden" name="session" value="{pseudo}">
-		Bonjour, <em>{pseudo}<em>
-		<p/>
-		<form action="consulter_sondage" method="GET">
-			<input type="submit" value="Mes sondages">
-		</form><p>
-		<form action="creer_un_sondage" method"GET">
-			<input type="submit" value="Créer un sondage">
+		Bonjour, {id}
+		<p>
+		<form action="/req_consulter_sondages" method="GET">
+			<button name="action" value="consulter">Mes sondages</button><p>
+			<input type="hidden" name="id" value="{id}">
+		</form>
+		<form action="/req_creer_un_sondage" method="GET">
+			<button name="action" value="creer">Créer un sondage</button>
+			<input type="hidden" name="id" value="{id}">
 		</form>
 	</body>
 </html>
