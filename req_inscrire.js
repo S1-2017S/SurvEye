@@ -12,7 +12,7 @@ require('remedial');
 var trait = function (req, res, query) {
 
 	var marqueurs;
-	var pseudo;
+	var id;
 	var password;
 	var confirm;				//VARIABLE_VERIFICATION_MDP
 	var registered;				//VARIABLE_CONFIRMATION_INSCRIPTION
@@ -29,7 +29,7 @@ var trait = function (req, res, query) {
 	trouve = false;
 	i = 0;
 	while(i<listeMembres.length && trouve === false) {				//VERIFICATION
-		if(listeMembres[i].pseudo === query.pseudo) {
+		if(listeMembres[i].id === query.id) {
 			trouve = true;
 		}
 		i++;
@@ -41,7 +41,7 @@ var trait = function (req, res, query) {
 
 		if (query.password === query.confirm) {
 			nouveauMembre = {};
-			nouveauMembre.pseudo = query.pseudo;
+			nouveauMembre.id = query.id;
 			nouveauMembre.password = query.password;
 			listeMembres[listeMembres.length] = nouveauMembre;
 			registered = true;
@@ -55,7 +55,7 @@ var trait = function (req, res, query) {
 
 			marqueurs = {};
 			marqueurs.erreur = "ERREUR : confirmation invalide !";
-			marqueurs.pseudo = query.pseudo;
+			marqueurs.id = query.id;
 			page = page.supplant(marqueurs);
 		}
 
@@ -65,7 +65,7 @@ var trait = function (req, res, query) {
 
 			marqueurs = {};
 			marqueurs.erreur = "ERREUR : ce compte existe déjà";
-			marqueurs.pseudo = query.pseudo;
+			marqueurs.id = query.id;
 			page = page.supplant(marqueurs);
 
 	} 
@@ -75,7 +75,7 @@ var trait = function (req, res, query) {
 		page = fs.readFileSync('modele_confirmation_inscription.html', 'UTF-8');
 
 		marqueurs = {};
-		marqueurs.pseudo = query.pseudo;
+		marqueurs.id = query.id;
 		marqueurs.password = query.password;
 		page = page.supplant(marqueurs);
 	}

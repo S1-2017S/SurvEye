@@ -27,7 +27,6 @@ var connexion = function (req, res, query) {
 
 	trouve = false;
 	i = 0;
-
 	while(i<listeMembres.length && trouve === false) {
 		if(listeMembres[i].id === query.id) {
 			if(listeMembres[i].password === query.password) {
@@ -47,7 +46,7 @@ var connexion = function (req, res, query) {
 		page = page.supplant(marqueurs);
 
 	} else {
-
+		console.log("true");
 		page = fs.readFileSync('modele_accueil_membre.html', 'UTF-8');
 
 		marqueurs = {};
