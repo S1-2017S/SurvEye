@@ -1,7 +1,7 @@
 //=========================================================================
 // Site WEB demo PI
 // Auteur : P. Thiré
-// Version : 09/10/2015
+// Version : 15/11/2017
 //=========================================================================
 
 "use strict";
@@ -18,6 +18,7 @@ var req_commencer = require("./req_commencer.js");
 var req_afficher_formulaire_inscription = require("./req_afficher_formulaire_inscription.js");
 var req_inscrire = require("./req_inscrire.js");
 var req_identifier = require("./req_identifier.js");
+var req_consulter_sondages = require("./req_consulter_sondages.js");
 
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
@@ -54,6 +55,9 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_identifier':
 				req_identifier(req, res, query);
+				break;
+			case '/req_consulter_sondages':
+				req_consulter_sondages(req,res,query);
 				break;
 			default:
 				req_static(req, res, query);
