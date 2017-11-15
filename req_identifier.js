@@ -1,7 +1,8 @@
+
 //=========================================================================
 // Traitement de "req_identifier"
-// Auteur : P. Thiré
-// Version : 09/10/2015
+// Auteur : Robin
+// Version : 15/11/2015
 //=========================================================================
 
 "use strict";
@@ -9,10 +10,10 @@
 var fs = require("fs");
 require('remedial');
 
-var trait = function (req, res, query) {
+var connexion = function (req, res, query) {
 
 	var marqueurs;
-	var pseudo;
+	var id;
 	var password;
 	var page;
 	var membre;
@@ -21,17 +22,14 @@ var trait = function (req, res, query) {
 	var i;
 	var trouve;
 
-	// ON LIT LES COMPTES EXISTANTS
-
-	contenu_fichier = fs.readFileSync("membres.json", 'utf-8');    
+	contenu_fichier = fs.readFileSync("membres.json", 'utf-8');
 	listeMembres = JSON.parse(contenu_fichier);
-
-	// ON VERIFIE QUE LE PSEUDO/PASSWORD EXISTE
 
 	trouve = false;
 	i = 0;
+
 	while(i<listeMembres.length && trouve === false) {
-		if(listeMembres[i].pseudo === query.pseudo) {
+		if(listeMembres[i].id === query.id) {
 			if(listeMembres[i].password === query.password) {
 				trouve = true;
 			}
@@ -39,25 +37,21 @@ var trait = function (req, res, query) {
 		i++;
 	}
 
-	// ON RENVOIT UNE PAGE HTML 
-
 	if(trouve === false) {
-		// SI IDENTIFICATION INCORRECTE, ON REAFFICHE PAGE ACCUEIL AVEC ERREUR
-
+	
 		page = fs.readFileSync('modele_accueil.html', 'utf-8');
 
 		marqueurs = {};
 		marqueurs.erreur = "ERREUR : compte ou mot de passe incorrect";
-		marqueurs.pseudo = query.pseudo;
+		marqueurs.id = query.id;
 		page = page.supplant(marqueurs);
 
 	} else {
-		// SI IDENTIFICATION OK, ON ENVOIE PAGE ACCUEIL MEMBRE
 
 		page = fs.readFileSync('modele_accueil_membre.html', 'UTF-8');
 
 		marqueurs = {};
-		marqueurs.pseudo = query.pseudo;
+		marqueurs.id = query.id;
 		page = page.supplant(marqueurs);
 	}
 
@@ -68,4 +62,4 @@ var trait = function (req, res, query) {
 
 //---------------------------------------------------------------------------
 
-module.exports = trait;
+module.exports = connexion;
