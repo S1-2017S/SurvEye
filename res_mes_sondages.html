@@ -4,16 +4,20 @@
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 
 <h2>Mes sondages</h2> 
+
 <br>
+
 <form action="req_traiter_sondage" method="GET">
-    Sondages disponnibles : <br>
+    Sondages disponibles : <br>
     <select name="sondage">
         {liste}
     <select>
 	<p>
     <input type="submit" name="acceder" value="Acceder">
 </form>
+
 <br>
+
 <form action="req_acceder_sondage" method="GET">
     Mes sondages : <br>
     <select name="sondage">

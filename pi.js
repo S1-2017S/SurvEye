@@ -21,7 +21,7 @@ var req_identifier = require("./req_identifier.js");
 var req_consulter_sondages = require("./req_consulter_sondages.js");
 var acceder = require("./acceder.js");
 var req_creer_un_sondage = require("./req_creer_un_sondage.js");
-
+var fermer = require("./fermer.js");
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
 
@@ -63,8 +63,9 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_traiter_sondage' :
 				if(query.acceder === "Acceder") {
-					console.log("tu es fou");
 					acceder(req, res, query);
+				}else if(query.bouton === "fermer") {
+					fermer(req, res, query);
 				}
 				break;
 			case '/req_creer_un_sondage':
