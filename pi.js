@@ -20,10 +20,14 @@ var req_inscrire = require("./req_inscrire.js");
 var req_identifier = require("./req_identifier.js");
 var req_consulter_sondages = require("./req_consulter_sondages.js");
 <<<<<<< HEAD
+<<<<<<< HEAD
 var acceder = require("./acceder.js");
 =======
 var req_creer_un_sondage = require("./req_creer_un_sondage.js");
 >>>>>>> 1d3316d62ac300d5991d1af76f722a68e59b3ab9
+=======
+var req_creer_un_sondage = require("./req_creer_un_sondage.js");
+>>>>>>> 9b91c9524f156f638eb58c837c32e94d2bf668b6
 
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
@@ -65,6 +69,7 @@ var traite_requete = function (req, res) {
 				req_consulter_sondages(req,res,query);
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			case '/req_traiter_sondage' :
 				if(query.acceder === "Acceder") {
 					acceder(req,res,query);
@@ -73,6 +78,10 @@ var traite_requete = function (req, res) {
 			case '/req_creer_un_sondage':
 				req_creer_un_sondage(req, res, query);
 >>>>>>> 1d3316d62ac300d5991d1af76f722a68e59b3ab9
+=======
+			case '/req_creer_un_sondage':
+				req_creer_un_sondage(req, res, query);
+>>>>>>> 9b91c9524f156f638eb58c837c32e94d2bf668b6
 				break;
 			default:
 				req_static(req, res, query);
