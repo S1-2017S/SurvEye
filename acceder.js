@@ -32,7 +32,11 @@ var trait = function(req,res,query) {
         page = fs.readFileSync("./res_resultats_sondage.html", "utf-8");
         marqueurs = {};
         marqueurs.id = query.id;
-        
+        page = page.supplant(marqueurs);
+    
     }
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(page);
+    res.end();
 }
 module.exports = trait;

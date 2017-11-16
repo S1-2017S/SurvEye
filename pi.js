@@ -63,8 +63,10 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_traiter_sondage' :
 				if(query.acceder === "Acceder") {
-					acceder(req,res,query);
+					console.log("tu es fou");
+					acceder(req, res, query);
 				}
+				break;
 			case '/req_creer_un_sondage':
 				req_creer_un_sondage(req, res, query);
 				break;
