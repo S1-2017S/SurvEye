@@ -19,7 +19,7 @@ var trait = function (req, res, query) {
 
 	marqueurs = {};
 	marqueurs.erreur = "";
-	marqueurs.pseudo = "";
+	marqueurs.id = "";
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
