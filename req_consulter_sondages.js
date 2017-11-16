@@ -21,7 +21,6 @@ var trait = function(req,res,query) {
 
     page = fs.readFileSync("./res_mes_sondages.html", "utf-8");
 
-    query.id = "test";
     marqueurs = {};
     marqueurs.id = query.id;
 
