@@ -1,7 +1,7 @@
 /*===============================================================================================
 re-ouverture du sondage
 Auteur : Thomas
-Version : 20/11/2017
+Version : 20/11/2017 14:24
 ===============================================================================================*/
 
 "use strict"
@@ -25,6 +25,9 @@ var open = function (req,res,query) {
 	marqueurs.confirm = "ouvert";
 	marqueurs.nom = query.sondage;
 	marqueurs.id = query.id;
+	if (query.bouton === "ouvrir") {
+		marqueurs.direction = "'mes sondages'";
+	}
 
 	page = page.supplant(marqueurs);
 
