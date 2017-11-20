@@ -23,6 +23,7 @@ var acceder = require("./acceder.js");
 var req_creer_un_sondage = require("./req_creer_un_sondage.js");
 var fermer = require("./fermer.js");
 var ouvrir = require("./ouvrir.js");
+var del = require("./delete.js");
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
 var req_tester_sondage = require("./req_tester_sondage.js");
@@ -71,6 +72,8 @@ var traite_requete = function (req, res) {
 					fermer(req, res, query);
 				}else if(query.bouton === "ouvrir") {
 					ouvrir(req, res, query);
+				}else if(query.bouton === "supprimer") {
+					del(req, res, query);
 				}
 				break;
 			case '/req_creer_un_sondage':
