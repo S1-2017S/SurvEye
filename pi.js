@@ -26,8 +26,7 @@ var ouvrir = require("./ouvrir.js");
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
 var req_tester_sondage = require("./req_tester_sondage.js");
-var req_confirm_action_sondage = require("./req_confirm_action_sondage.js");
-
+var creation = require("./creation.js");
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
 //-------------------------------------------------------------------------
@@ -77,10 +76,11 @@ var traite_requete = function (req, res) {
 				req_creer_un_sondage(req, res, query);
 				break;
 			case '/req_tester_sondage':
-				req_tester_sondage(req, res, query);
-				break;
-			case '/req_confirm_action_sondage':
-				req_confirm_action_sondage(res, req, query);
+				if(query.bouton === "confirmer") {
+					creation(res, req, query);
+				} else {				
+					req_tester_sondage(req, res, query);
+				};
 				break;
 			default:
 				req_static(req, res, query);
