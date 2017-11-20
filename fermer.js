@@ -25,6 +25,9 @@ var close = function (req,res,query) {
 	marqueurs.confirm = "fermé";
 	marqueurs.nom = query.sondage;
 	marqueurs.id = query.id;
+	if (query.bouton === "fermer") {
+		marqueurs.direction = "'mes sondages'";
+	}
 
 	page = page.supplant(marqueurs);
 
