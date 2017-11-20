@@ -3,6 +3,23 @@
 
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 
-<center><h2>Créez votre sondage !</h2></center>
+    <body>
+        <center><h2>Créez votre sondage !</h2></center>
+        
+        <form action ="req_creer_un_sondage" method="GET">
+            <input type="submit" name="ajouter" value="Ajouter une question">
+            <input type="submit" name="supprimer" value="Supprimer la question">
+        </form>
+        <form action ="req_tester_sondage" method="GET">
+            <input type="submit" name="tester" value="Tester le sondage">
+        </form>
+        <br>
+        <form action ="req_creer_un_sondage" method="GET">
+            <select name="aller_question_n">
+                <option value=""></option>
+            </select>
+            <input type="submit" name="valider" value="voir">
+        </form>
+    </body>
 
 </html>
