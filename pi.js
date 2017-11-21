@@ -27,6 +27,8 @@ var del = require("./delete.js");
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
 var req_tester_sondage = require("./req_tester_sondage.js");
+var req_confirm_action_sondage = require("./req_confirm_action_sondage.js");
+var req_ajouter_une_question = require("./req_ajouter_une_question.js");
 var req_confirmer_creation_sondage = require("./req_confirmer_creation_sondage.js");
 var req_terminer_test = require("./req_terminer_test.js");
 
@@ -79,6 +81,9 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_creer_un_sondage':
 				req_creer_un_sondage(req, res, query);
+				break;
+			case '/req_ajouter_une_question':
+				req_ajouter_une_question(req, res, query);
 				break;
 			case '/req_tester_sondage':
 				if(query.bouton === "confirmer") {
