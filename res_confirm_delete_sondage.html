@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-
-<body>
-	<h1> Voulez-vous vraiment supprimer le sondage {nom} ?</h1>
-	<input type="hidden" value="{id}" name="id">
-	<input type="submit" name="delete" value="oui">
-	<input type="submit" name="delete" value="non">
-</body>
-
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+	<body>
+		<h1> Voulez-vous vraiment supprimer le sondage {sondage} ?</h1>
+		<form action="req_confirm_delete" method="GET">
+			<input type="hidden" value="{id}" name="id">
+			<input type="hidden" value="{sondage}" name="sondage">
+			<input type="submit" name="delete" value="oui">
+			<input type="submit" name="delete" value="non">
+		</form>
+	</body>
 </html>

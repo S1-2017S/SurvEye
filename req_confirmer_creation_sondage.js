@@ -16,9 +16,10 @@ var create = function (req, res, query) {
     page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
 
 	marqueurs = {};
-	marqueurs.nom = "sondage1"
+	marqueurs.nom = "{nom du sodage}"
 	marqueurs.confirm = "crée";
-    marqueurs.direction = "accueil membre"
+	marqueurs.direction = "accueil membre"
+	marqueurs.id = query.id;
 
 	page = page.supplant(marqueurs);
 
