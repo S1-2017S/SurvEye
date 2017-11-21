@@ -81,13 +81,13 @@ var traite_requete = function (req, res) {
 				req_creer_un_sondage(req, res, query);
 				break;
 			case '/req_tester_sondage':
-				if(query.bouton === "confirmer") {
-					req_confirmer_creation_sondage(req, res, query);
-				} else if(query.bouton === "terminer") {
-					req_terminer_test(req, res, query);
-				} else {				
-					req_tester_sondage(req, res, query);
-				};
+				req_tester_sondage(req, res, query);
+				break;
+			case '/req_confirmer_creation_sondage':
+				req_confirmer_creation_sondage(req, res, query);
+				break;
+			case'/req_terminer_test':
+				req_terminer_test(req, res, query);
 				break;
 			default:
 				req_static(req, res, query);
