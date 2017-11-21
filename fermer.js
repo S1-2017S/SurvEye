@@ -21,12 +21,9 @@ var close = function (req,res,query) {
 	page = fs.readFileSync("./res_confirm_action_sondage.html","utf-8");
 
 	marqueurs = {};
-	marqueurs.confirm = "fermé";
-	marqueurs.nom = query.sondage;
+	marqueurs.confirm = "votre sondage",query.sondage,"a bien été fermé";
 	marqueurs.id = query.id;
-	if (query.bouton === "fermer") {
-		marqueurs.direction = "'mes sondages'";
-	}
+	marqueurs.direction = "'mes sondages'";
 
 	page = page.supplant(marqueurs);
 
