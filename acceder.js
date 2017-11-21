@@ -44,7 +44,8 @@ var trait = function(req,res,query) {
         for(i = 0; i < contenu_fichier.questions.length; i++) {
             marqueurs.questions += "<h2>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</h2><br>"
             for(x = 0; x < contenu_fichier.reponses[i].length; x++) {
-                marqueurs.questions += ""
+                console.log(x);
+                marqueurs.questions += "<input type='radio' name='q"+i+"' value='r"+x+"'>"+contenu_fichier.reponses[i][x]+"<br>"
             }
         }
         page = page.supplant(marqueurs);
