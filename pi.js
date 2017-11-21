@@ -23,10 +23,14 @@ var acceder = require("./acceder.js");
 var req_creer_un_sondage = require("./req_creer_un_sondage.js");
 var fermer = require("./fermer.js");
 var ouvrir = require("./ouvrir.js");
+var del = require("./delete.js");
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
 var req_tester_sondage = require("./req_tester_sondage.js");
 var req_confirm_action_sondage = require("./req_confirm_action_sondage.js");
+var req_ajouter_une_question = require("./req_ajouter_une_question.js");
+var req_confirmer_creation_sondage = require("./req_confirmer_creation_sondage.js");
+var req_terminer_test = require("./req_terminer_test.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -65,22 +69,30 @@ var traite_requete = function (req, res) {
 				req_consulter_sondages(req,res,query);
 				break;
 			case '/req_traiter_sondage' :
-				if(query.acceder === "Acceder") {
+				if(query.bouton === "acceder") {
 					acceder(req, res, query);
 				}else if(query.bouton === "fermer") {
 					fermer(req, res, query);
 				}else if(query.bouton === "ouvrir") {
 					ouvrir(req, res, query);
+				}else if(query.bouton === "supprimer") {
+					del(req, res, query);
 				}
 				break;
 			case '/req_creer_un_sondage':
 				req_creer_un_sondage(req, res, query);
 				break;
-			case '/req_tester_sondage':
-				req_tester_sondage(req, res, query);
+			case '/req_ajouter_une_question':
+				req_ajouter_une_question(req, res, query);
 				break;
-			case '/req_confirm_action_sondage':
-				req_confirm_action_sondage(res, req, query);
+			case '/req_tester_sondage':
+				if(query.bouton === "confirmer") {
+					req_confirmer_creation_sondage(req, res, query);
+				} else if(query.bouton === "terminer") {
+					req_terminer_test(req, res, query);
+				} else {				
+					req_tester_sondage(req, res, query);
+				};
 				break;
 			default:
 				req_static(req, res, query);
