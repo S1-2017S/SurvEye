@@ -23,10 +23,13 @@ var acceder = require("./acceder.js");
 var req_creer_un_sondage = require("./req_creer_un_sondage.js");
 var fermer = require("./fermer.js");
 var ouvrir = require("./ouvrir.js");
+var del = require("./delete.js");
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
 var req_tester_sondage = require("./req_tester_sondage.js");
-var creation = require("./creation.js");
+var req_confirmer_creation_sondage = require("./req_confirmer_creation_sondage.js");
+var req_terminer_test = require("./req_terminer_test.js");
+
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
 //-------------------------------------------------------------------------
@@ -70,6 +73,8 @@ var traite_requete = function (req, res) {
 					fermer(req, res, query);
 				}else if(query.bouton === "ouvrir") {
 					ouvrir(req, res, query);
+				}else if(query.bouton === "supprimer") {
+					del(req, res, query);
 				}
 				break;
 			case '/req_creer_un_sondage':
@@ -77,7 +82,9 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_tester_sondage':
 				if(query.bouton === "confirmer") {
-					creation(res, req, query);
+					req_confirmer_creation_sondage(req, res, query);
+				} else if(query.bouton === "terminer") {
+					req_terminer_test(req, res, query);
 				} else {				
 					req_tester_sondage(req, res, query);
 				};
