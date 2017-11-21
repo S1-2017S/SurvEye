@@ -1,7 +1,7 @@
 //=========================================================================
 // Traitement du cas "acceder"
 // Auteur : Olivier
-// Version : 16/11/2017
+// Version : 21/11/2017
 //=========================================================================
 "use strict"
 
@@ -14,7 +14,8 @@ var trait = function(req,res,query) {
     var marqueurs;
     var contenu_fichier;
     var trouve;
-    var i = 0;
+    var i;
+    var x;
 
     contenu_fichier = fs.readFileSync("./"+query.sondage+".json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
@@ -28,12 +29,26 @@ var trait = function(req,res,query) {
             i++;
         }
     }
-    if(trouve === true) {
-        page = fs.readFileSync("./res_resultats_sondage.html", "utf-8");
+
+    if(trouve === false) {
+        //page = fs.readFileSync("./res_resultats_sondage.html", "utf-8");
         marqueurs = {};
         marqueurs.id = query.id;
         page = page.supplant(marqueurs);
     
+    }else if(trouve === true) {
+        page = fs.readFileSync("./res_reponse_sondage.html", "utf-8");
+        marqueurs = {};
+        marqueurs.id = query.id;
+        marqueurs.questions = "";
+        for(i = 0; i < contenu_fichier.questions.length; i++) {
+            marqueurs.questions += "<h2>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</h2><br>"
+            for(x = 0; x < contenu_fichier.reponses[i].length; x++) {
+                console.log(x);
+                marqueurs.questions += "<input type='radio' name='q"+i+"' value='r"+x+"'>"+contenu_fichier.reponses[i][x]+"<br>"
+            }
+        }
+        page = page.supplant(marqueurs);
     }
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(page);

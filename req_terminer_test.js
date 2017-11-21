@@ -18,7 +18,7 @@ var terminer = function (req, res, query) {
 
 	marqueurs = {};
 	marqueurs.erreur = "";
-	marqueurs.id = "";
+	marqueurs.id = query.id;
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
