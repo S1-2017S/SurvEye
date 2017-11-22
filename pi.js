@@ -33,6 +33,7 @@ var req_confirmer_creation_sondage = require("./req_confirmer_creation_sondage.j
 var req_terminer_test = require("./req_terminer_test.js");
 var req_retour_accueil_membre = require("./req_retour_accueil_membre.js");
 var req_valider_reponse = require("./req_valider_reponse.js");
+var valider = require("./valider.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -79,6 +80,11 @@ var traite_requete = function (req, res) {
 					ouvrir(req, res, query);
 				}else if(query.bouton === "supprimer") {
 					del(req, res, query);
+				}
+				break;
+			case '/req_editer_sondage' :
+				if(query.p === "Valider") {
+					valider(req,res,query);
 				}
 				break;
 			case '/req_confirm_delete' :
