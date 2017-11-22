@@ -23,12 +23,13 @@
 <br>
 
 <form action="req_acceder_sondage" method="GET">
+    <input type="hidden" value="{id}" name="id">
     Mes sondages : <br>
     <select name="sondage">
         {liste2}
     <select>
 	<p>
-    <input type="submit" name="acceder" value="Acceder">
+    <input type="submit" name="acceder" value="acceder">
 </form>
 
 </html>
