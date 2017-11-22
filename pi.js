@@ -71,7 +71,7 @@ var traite_requete = function (req, res) {
 				req_consulter_sondages(req,res,query);
 				break;
 			case '/req_traiter_sondage' :
-				if (query.bouton === "accueil") {
+				if (query.bouton === "Accueil") {
 					req_retour_accueil_membre(req, res, query);
 				}else if(query.bouton === "Acceder") {
 					acceder(req, res, query);
