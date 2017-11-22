@@ -6,6 +6,13 @@
 <h2>Mes sondages</h2> 
 
 <br>
+<form action="req_retour_accueil_membre" method="GET">
+    Retour à l'accueil <br>
+    <input type="hidden" name="id" value="{id}">
+    <input type="submit" name="bouton" value="accueil">
+</form>
+
+<br>
 
 <form action="req_traiter_sondage" method="GET">
     Sondages disponibles : <br>
@@ -22,7 +29,7 @@
 
 <br>
 
-<form action="req_acceder_sondage" method="GET">
+<form action="req_traiter_sondage" method="GET">
     <input type="hidden" value="{id}" name="id">
     Mes sondages : <br>
     <select name="sondage">
