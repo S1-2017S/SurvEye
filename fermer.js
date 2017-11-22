@@ -23,7 +23,7 @@ var close = function (req,res,query) {
 	marqueurs = {};
 	marqueurs.confirm = "votre sondage",query.sondage,"a bien été fermé";
 	marqueurs.id = query.id;
-	marqueurs.direction = "'mes sondages'";
+	marqueurs.direction = "'Mes sondages'";
 
 	page = page.supplant(marqueurs);
 

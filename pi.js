@@ -73,13 +73,13 @@ var traite_requete = function (req, res) {
 			case '/req_traiter_sondage' :
 				if (query.bouton === "accueil") {
 					req_retour_accueil_membre(req, res, query);
-				}else if(query.bouton === "acceder") {
+				}else if(query.bouton === "Acceder") {
 					acceder(req, res, query);
-				}else if(query.bouton === "fermer") {
+				}else if(query.bouton === "Fermer") {
 					fermer(req, res, query);
-				}else if(query.bouton === "ouvrir") {
+				}else if(query.bouton === "Ouvrir") {
 					ouvrir(req, res, query);
-				}else if(query.bouton === "supprimer") {
+				}else if(query.bouton === "Supprimer") {
 					del(req, res, query);
 				}
 				break;
