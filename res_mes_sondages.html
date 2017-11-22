@@ -6,30 +6,37 @@
 <h2>Mes sondages</h2> 
 
 <br>
+<form action="req_retour_accueil_membre" method="GET">
+    Retour à l'accueil <br>
+    <input type="hidden" name="id" value="{id}">
+    <input type="submit" name="bouton" value="Accueil">
+</form>
+
+<br>
 
 <form action="req_traiter_sondage" method="GET">
-    Sondages disponibles : <br>
+    Mes sondages : <br>
     <select name="sondage">
         {liste}
     <select>
 	<p>
     <input type="hidden" value="{id}" name="id">
-    <input type="submit" name="bouton" value="acceder">
-    <input type="submit" name="bouton" value="fermer">
-    <input type="submit" name="bouton" value="ouvrir">
-    <input type="submit" name="bouton" value="supprimer">
+    <input type="submit" name="bouton" value="Acceder">
+    <input type="submit" name="bouton" value="Fermer">
+    <input type="submit" name="bouton" value="Ouvrir">
+    <input type="submit" name="bouton" value="Supprimer">
 </form>
 
 <br>
 
-<form action="req_acceder_sondage" method="GET">
+<form action="req_traiter_sondage" method="GET">
     <input type="hidden" value="{id}" name="id">
-    Mes sondages : <br>
+    Sondages disponibles : <br>
     <select name="sondage">
         {liste2}
     <select>
 	<p>
-    <input type="submit" name="acceder" value="acceder">
+    <input type="submit" name="acceder" value="Acceder">
 </form>
 
 </html>

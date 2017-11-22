@@ -1,7 +1,7 @@
 //=========================================================================
 // Site WEB demo PI
-// Auteur : P. Thiré
-// Version : 15/11/2017
+// Auteur : SurvEye
+// Version : 22/11/2017
 //=========================================================================
 
 "use strict";
@@ -72,13 +72,15 @@ var traite_requete = function (req, res) {
 				req_consulter_sondages(req,res,query);
 				break;
 			case '/req_traiter_sondage' :
-				if(query.bouton === "acceder") {
+				if (query.bouton === "Accueil") {
+					req_retour_accueil_membre(req, res, query);
+				}else if(query.bouton === "Acceder") {
 					acceder(req, res, query);
-				}else if(query.bouton === "fermer") {
+				}else if(query.bouton === "Fermer") {
 					fermer(req, res, query);
-				}else if(query.bouton === "ouvrir") {
+				}else if(query.bouton === "Ouvrir") {
 					ouvrir(req, res, query);
-				}else if(query.bouton === "supprimer") {
+				}else if(query.bouton === "Supprimer") {
 					del(req, res, query);
 				}
 				break;
