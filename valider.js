@@ -16,6 +16,7 @@ var trait = function(req,res,query) {
     var question;
     var reponses;
     var i;
+    var j;
 
     page = fs.readFileSync("./res_creation_sondage.html", "utf-8");
 
@@ -27,7 +28,7 @@ var trait = function(req,res,query) {
     question = query.q;
     reponses = [];
     for(i = 0; i < 10; i ++) {
-        if(query.i !== "") {
+        if(query[String(i)] !== "") {
             reponses.push(query[String(i)]);
         }
     }
