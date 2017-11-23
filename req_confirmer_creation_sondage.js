@@ -1,7 +1,7 @@
 /*===============================================================================================
 confirmation création sondage
 Auteur : Robin
-Version : 20/11/2017
+Version : 23/11/2017
 ===============================================================================================*/
 
 "use strict"
@@ -13,11 +13,34 @@ var create = function (req, res, query) {
 	var page;
 	var contenu_fichier;
 	var chaine = "[]";
-
-	chaine = JSON.stringify();
-	fs.writeFileSync(query.sondage+".JSON", chaine, "UTF-8" );
+	var i;
+	var trouve_id = false;
+	var id = {};
 
     page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
+
+	chaine = JSON.stringify(chaine);
+	fs.writeFileSync(query.sondage+".json", chaine, "UTF-8" );
+	
+	contenu_fichier = fs.readFileSync("./profils.json", "UTF-8");
+	contenu_fichier = JSON.parse(contenu_fichier);
+
+	i = 0;
+	while (i < contenu_fichier.length) {
+		if(query.id === contenu_fichier[i].id) {
+			contenu_fichier[i].sondageuser.push(query.sondage);
+			trouve_id = true;
+		}
+		i++
+	};
+	if (trouve_id === false) {
+		console.log(contenu_fichier.length);
+		contenu_fichier.length.push(query.id);
+		contenu_fichier[i].sondageuser.push(query.sondage);
+	}
+
+	contenu_fichier = JSON.stringify(contenu_fichier);
+	fs.writeFileSync("./profils.json",contenu_fichier,"utf-8");
 
 	marqueurs = {};
 	marqueurs.nom = query.sondage;
