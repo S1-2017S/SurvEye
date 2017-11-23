@@ -24,9 +24,7 @@ var open = function (req,res,query) {
 	marqueurs.confirm = "ouvert";
 	marqueurs.nom = query.sondage;
 	marqueurs.id = query.id;
-	if (query.bouton === "ouvrir") {
-		marqueurs.direction = "'mes sondages'";
-	}
+	marqueurs.direction = "'mes sondages'";
 
 	page = page.supplant(marqueurs);
 
