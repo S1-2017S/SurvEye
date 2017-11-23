@@ -26,6 +26,7 @@ var trait = function(req,res,query) {
 
     contenu_fichier = fs.readFileSync("./profils.JSON", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
+
     for(i = 0; i < contenu_fichier.length; i++) {
         if(contenu_fichier[i].id === query.id) {
             console.log(contenu_fichier[i].sondageuser);
@@ -37,6 +38,7 @@ var trait = function(req,res,query) {
 
     contenu_fichier = fs.readFileSync("./profils.JSON", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
+    
     for(i = 0; i < contenu_fichier.length; i++) {
         if(contenu_fichier[i].id === query.id) {
             console.log(contenu_fichier[i].sondageguest);
