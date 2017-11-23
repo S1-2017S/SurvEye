@@ -31,7 +31,7 @@ var trait = function(req,res,query) {
     }
 
     if(trouve === true) {
-        //page = fs.readFileSync("./res_resultats_sondage.html", "utf-8");
+        page = fs.readFileSync("./res_resultats_sondage.html", "utf-8");
         marqueurs = {};
         marqueurs.id = query.id;
         page = page.supplant(marqueurs);
