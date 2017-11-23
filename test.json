@@ -1,1 +1,1 @@
-{"ids":[],"etat":"closed","questions":["Ta daronne ?","Coucou"],"reponses":[["Elle est bien bonne","Salut"],["Hello"]], "answers" : [[0,0],[0]]}
+{"ids":["test"],"etat":"opened","questions":["Ta daronne ?","Coucou"],"reponses":[["Elle est bien bonne","Salut"],["Hello"]],"answers":[[0,0],[0]]}
