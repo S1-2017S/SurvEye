@@ -31,4 +31,3 @@ anychartExport.exportTo(chart, 'jpg').then(function(image) {
   console.log(generationError.message);
   process.exit(1);
 });
-                                        
