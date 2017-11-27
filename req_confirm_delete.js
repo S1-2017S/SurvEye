@@ -15,6 +15,11 @@ var confirm_del = function (req,res,query) {
 	var i;
 	var j;
 	var sondage = String(query.sondage);
+
+/*===============================================================================================
+Suppression du sondage
+===============================================================================================*/
+	
 	contenu_fichier = fs.readFileSync("./profils.JSON","utf-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 
@@ -42,7 +47,7 @@ var confirm_del = function (req,res,query) {
 		marqueurs.confirm = "Votre sondage "+sondage+" n'a pas été supprimé";
 	}
 
-		
+//===============================================================================================
 
 	marqueurs.sondage = query.sondage;
 	marqueurs.id = query.id;

@@ -13,12 +13,18 @@ var close = function (req,res,query) {
 	var page;
 	var contenu_fichier;
 
+/*===============================================================================================
+Fermeture du sondage
+===============================================================================================*/
+
 	contenu_fichier = fs.readFileSync("./"+query.sondage+".json","utf-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 	contenu_fichier.etat = "closed";
 	contenu_fichier = JSON.stringify(contenu_fichier);
 	fs.writeFileSync("./"+query.sondage+".json",contenu_fichier,"utf-8");
 	page = fs.readFileSync("./res_confirm_action_sondage.html","utf-8");
+
+//===============================================================================================
 
 	marqueurs = {};
 	marqueurs.confirm = "votre sondage",query.sondage,"a bien été fermé";
