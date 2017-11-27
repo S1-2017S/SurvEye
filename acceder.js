@@ -31,9 +31,11 @@ var trait = function(req,res,query) {
     }
 
     if(trouve === true) {
-        //page = fs.readFileSync("./res_resultats_sondage.html", "utf-8");
+        page = fs.readFileSync("./res_resultats_sondages.html", "utf-8");
         marqueurs = {};
         marqueurs.id = query.id;
+        var oui = require('./chart.js','utf-8');
+        oui;
         page = page.supplant(marqueurs);
     
     }else if(trouve === false) {
@@ -41,7 +43,6 @@ var trait = function(req,res,query) {
         marqueurs = {};
         marqueurs.id = query.id;
         marqueurs.questions = "";
-        console.log(query.sondage);
         marqueurs.sondage = query.sondage;
         for(i = 0; i < contenu_fichier.questions.length; i++) {
             marqueurs.questions += "<h2>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</h2><br>"
