@@ -60,3 +60,5 @@ typings/
 membres.json
 membres.json
 profils.json
+*.json
+*.json
