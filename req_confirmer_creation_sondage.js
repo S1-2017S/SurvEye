@@ -15,7 +15,9 @@ var create = function (req, res, query) {
 	var chaine = "[]";
 	var i;
 	var trouve_id = false;
-	var id = {};
+	var id;
+	var sondageuser = [];
+	var sondageguest = [];
 
     page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
 
@@ -34,9 +36,7 @@ var create = function (req, res, query) {
 		i++
 	};
 	if (trouve_id === false) {
-		console.log(contenu_fichier.length);
-		contenu_fichier.length.push(query.id);
-		contenu_fichier[i].sondageuser.push(query.sondage);
+		contenu_fichier.id.length = query.id;
 	}
 
 	contenu_fichier = JSON.stringify(contenu_fichier);

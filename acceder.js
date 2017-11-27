@@ -34,8 +34,6 @@ var trait = function(req,res,query) {
         page = fs.readFileSync("./res_resultats_sondages.html", "utf-8");
         marqueurs = {};
         marqueurs.id = query.id;
-        var oui = require('./chart.js','utf-8');
-        oui;
         page = page.supplant(marqueurs);
     
     }else if(trouve === false) {

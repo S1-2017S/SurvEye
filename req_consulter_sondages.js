@@ -24,7 +24,7 @@ var trait = function(req,res,query) {
     marqueurs = {};
     marqueurs.id = query.id;
 
-    contenu_fichier = fs.readFileSync("./profils.JSON", "utf-8");
+    contenu_fichier = fs.readFileSync("./profils.json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
 
     for(i = 0; i < contenu_fichier.length; i++) {
@@ -36,7 +36,7 @@ var trait = function(req,res,query) {
         }
     }
 
-    contenu_fichier = fs.readFileSync("./profils.JSON", "utf-8");
+    contenu_fichier = fs.readFileSync("./profils.json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
     
     for(i = 0; i < contenu_fichier.length; i++) {
