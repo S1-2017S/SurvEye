@@ -12,13 +12,11 @@ var create = function (req, res, query) {
 	var marqueurs;
 	var page;
 	var contenu_fichier;
-	var chaine = "[]";
+	var chaine = [];
 	var i;
 	var j;
 	var trouve_id = false;
 	var trouve_sondage = false;
-
-    
 
 	chaine = JSON.stringify(chaine);
 	fs.writeFileSync(query.sondage+".json", chaine, "UTF-8" );
@@ -75,3 +73,5 @@ var create = function (req, res, query) {
 	res.write(page);
 	res.end();
 };
+
+module.exports = create;
