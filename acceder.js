@@ -16,6 +16,8 @@ var trait = function(req,res,query) {
     var trouve;
     var i;
     var x;
+    var w;
+    var nb_reponses;
 
     contenu_fichier = fs.readFileSync("./"+query.sondage+".json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
@@ -34,6 +36,20 @@ var trait = function(req,res,query) {
         page = fs.readFileSync("./res_resultats_sondages.html", "utf-8");
         marqueurs = {};
         marqueurs.id = query.id;
+        marqueurs.sondage = "";
+        nb_reponses = 0;
+        for(i = 0; i < contenu_fichier.answers.length; i++) {
+            marqueurs.sondage += "<h2>"+contenu_fichier.questions[i]+"</h2><br>";
+            for(x = 0; x < contenu_fichier.answers[i].length; x++) {
+                if(contenu_fichier.answers[i][x] !== 0) {
+                    nb_reponses += contenu_fichier.answers[i][x];
+                }
+            }
+            for(x = 0; x < contenu_fichier.answers[i].length; x++) {
+                console.log(contenu_fichier.reponses[i][x]);
+                marqueurs.sondage += contenu_fichier.reponses[i][x]+"<img src='./barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%><br>";
+            }
+        }
         page = page.supplant(marqueurs);
     
     }else if(trouve === false) {
