@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    </head>
+    <p>Entrez le nom de votre sondage
+    </p>
+    <body>
+        <form action="req_confirmer_creation_sondage" method="GET">
+            <input type="textarea" name="sondage" value="">
+            <input type="submit" name="confirmer" value="Confirmer">
+            <input type="hidden" name="id" value="{id}">
+            {erreur}
+        </form>
+    </body>
