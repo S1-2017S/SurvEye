@@ -1,7 +1,7 @@
 /*===============================================================================================
-confirmation création sondage
+Traitement de : "req_retour_accueil_membre"
 Auteur : Robin
-Version : 20/11/2017
+Version : 28/11/2017
 ===============================================================================================*/
 
 "use strict"
@@ -12,7 +12,11 @@ var retour = function (req, res, query) {
 	var marqueurs;
 	var page;
 	var contenu_fichier;
-        
+
+/*
+Affichage de la page d'accueil membre
+*/
+
     page = fs.readFileSync("./modele_accueil_membre.html","utf-8");
 
 	marqueurs = {};

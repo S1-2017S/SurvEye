@@ -14,6 +14,9 @@ var trait = function (req, res, query) {
 	var marqueurs;
 	var page;
 
+/*
+Affichage de la page test sondage de création de sondage
+*/
 	page = fs.readFileSync('res_test_sondage.html', 'utf-8');
 
 	marqueurs = {};

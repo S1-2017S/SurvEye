@@ -14,6 +14,9 @@ var terminer = function (req, res, query) {
 	var marqueurs;
 	var page;
 
+/*
+Affichage page création de sondage de accueil membre 
+*/
 	page = fs.readFileSync('res_creation_sondage.html', 'utf-8');
 
 	marqueurs = {};
