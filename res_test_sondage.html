@@ -5,6 +5,11 @@
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
     </head>
     <body>
+        <form action="req_navigation_sondage" method="GET">
+            <input type="submit" name="next" value="Prochaine">
+            <input type="submit" name="before" value="Précédente">
+        </form>
+
         <form action="req_confirmer_creation_sondage" method="GET">
             <input type="textarea" name="sondage" value="">
             <input type="submit" name="confirmer" value="Confirmer">
@@ -12,7 +17,7 @@
             {erreur}
         </form>
         <form action="req_terminer_test" method="GET">
-            <input type="submit" name="terminer" value="Terminer">
+            <input type="submit" name="retour" value="Retour édition">
             <input type="hidden" name="id" value="{id}">
         </form>
     </body>

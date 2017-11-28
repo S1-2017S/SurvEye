@@ -17,6 +17,7 @@ var create = function (req, res, query) {
 	var j;
 	var trouve_id = false;
 	var trouve_sondage = false;
+	var fichier_sondage;
 
 	chaine = JSON.stringify(chaine);
 	fs.writeFileSync(query.sondage+".json", chaine, "UTF-8" );
@@ -47,6 +48,12 @@ Ou affichage erreur dans le page test sondage
 	if (trouve_id === true && trouve_sondage === false) {
 		contenu_fichier[i-1].sondageuser.push(query.sondage);
 		
+		fichier_sondage = fs.readFileSync("./"+query.id+"t.json", "utf-8");
+		fichier_sondage = JSON.parse(fichier_sondage);
+		fichier_sondage.ids = query.sondage;
+		chaine = JSON.stringify(fichier_sondage);		
+		fs.writeFileSync("./"+query.sondage+".json", chaine, "utf-8");
+
 		page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./profils.json",contenu_fichier,"utf-8");
@@ -55,7 +62,7 @@ Ou affichage erreur dans le page test sondage
 		marqueurs.nom = query.sondage;
 		marqueurs.confirm = "crée";
 		marqueurs.direction = "accueil membre";
-		marqueurs.id = query.id;	
+		marqueurs.id = query.id;
 
 	} else if (trouve_id === false) {
 		page = fs.readFileSync("./res_valider_sondage.html","utf-8");		
