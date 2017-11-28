@@ -14,8 +14,8 @@ var trait = function (req, res, query) {
 	var marqueurs;
 	var id;
 	var password;
-	var confirm;				//VARIABLE_VERIFICATION_MDP
-	var registered;				//VARIABLE_CONFIRMATION_INSCRIPTION
+	var confirm;													//VARIABLE_VERIFICATION_MDP
+	var registered;													//VARIABLE_CONFIRMATION_INSCRIPTION
 	var page;
 	var contenu_fichier;
 	var nouveauMembre;
@@ -23,10 +23,10 @@ var trait = function (req, res, query) {
 	var i;
 	var trouve;
 	var profils;
-	var listeProfils;
+	var listeProfils; 
 	var nouveauProfil;
 
-	contenu_fichier = fs.readFileSync("membres.json", 'utf-8');    // LECTURE
+	contenu_fichier = fs.readFileSync("membres.json", 'utf-8');     // LECTURE
 	listeMembres = JSON.parse(contenu_fichier);
 	profils = fs.readFileSync("profils.json",'utf-8');
 	listeProfils = JSON.parse(profils);
