@@ -27,11 +27,11 @@ var create = function (req, res, query) {
 Vérification si l'id du user et du nom du sondage existent dans profils.json
 */
 	i = 0;
-	while (i < contenu_fichier.length) {
+	while (trouve_id === false && i < contenu_fichier.length) {
 		if(query.id === contenu_fichier[i].id) {
 			trouve_id = true;
 			j = 0;
-			while (j < contenu_fichier[i].sondageuser.length) {
+			while (trouve_sondage === false && j < contenu_fichier[i].sondageuser.length) {
 				if(query.sondage === contenu_fichier[i].sondageuser[j]) {
 					trouve_sondage = true;
 				}
