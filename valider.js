@@ -34,6 +34,8 @@ var trait = function(req,res,query) {
     }
     contenu_fichier.questions.push(question);
     contenu_fichier.reponses.push(reponses);
+
+    marqueurs.question = "<h3>Question "+(contenu_fichier.questions.length+1) + "<h3>"
     
     contenu_fichier = JSON.stringify(contenu_fichier);
     fs.writeFileSync("./"+query.id+"t.json", contenu_fichier, "utf-8");
