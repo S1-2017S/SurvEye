@@ -1,7 +1,7 @@
 /*===============================================================================================
 confirmation création sondage
 Auteur : Robin
-Version : 23/11/2017
+Version : 27/11/2017
 ===============================================================================================*/
 
 "use strict"
@@ -14,12 +14,11 @@ var create = function (req, res, query) {
 	var contenu_fichier;
 	var chaine = "[]";
 	var i;
+	var j;
 	var trouve_id = false;
-	var id;
-	var sondageuser = [];
-	var sondageguest = [];
+	var trouve_sondage = false;
 
-    page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
+    
 
 	chaine = JSON.stringify(chaine);
 	fs.writeFileSync(query.sondage+".json", chaine, "UTF-8" );
@@ -30,23 +29,45 @@ var create = function (req, res, query) {
 	i = 0;
 	while (i < contenu_fichier.length) {
 		if(query.id === contenu_fichier[i].id) {
-			contenu_fichier[i].sondageuser.push(query.sondage);
 			trouve_id = true;
+			j = 0;
+			while (j < contenu_fichier[i].sondageuser.length) {
+				if(query.sondage === contenu_fichier[i].sondageuser[j]) {
+					trouve_sondage = true;
+				}
+				console.log("j"+j)
+				j++
+			}
 		}
+		console.log("i"+i)		
 		i++
 	};
-	if (trouve_id === false) {
-		contenu_fichier.id.length = query.id;
+	
+	if (trouve_id === true && trouve_sondage === false) {
+		contenu_fichier[i-1].sondageuser.push(query.sondage);
+		
+		page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
+		contenu_fichier = JSON.stringify(contenu_fichier);
+		fs.writeFileSync("./profils.json",contenu_fichier,"utf-8");
+
+		marqueurs = {};
+		marqueurs.nom = query.sondage;
+		marqueurs.confirm = "crée";
+		marqueurs.direction = "accueil membre";
+		marqueurs.id = query.id;	
+
+	} else if (trouve_id === false) {
+		page = fs.readFileSync("./res_test_sondage.html","utf-8");		
+		marqueurs = {};
+		marqueurs.erreur = "mauvais id";
+		marqueurs.id = query.id;
+
+	} else if (trouve_sondage === true) {
+		page = fs.readFileSync("./res_test_sondage.html","utf-8");		
+		marqueurs = {};
+		marqueurs.erreur = "Nom déjà pris."
+		marqueurs.id = query.id;
 	}
-
-	contenu_fichier = JSON.stringify(contenu_fichier);
-	fs.writeFileSync("./profils.json",contenu_fichier,"utf-8");
-
-	marqueurs = {};
-	marqueurs.nom = query.sondage;
-	marqueurs.confirm = "crée";
-	marqueurs.direction = "accueil membre";
-	marqueurs.id = query.id;
 
 	page = page.supplant(marqueurs);
 
@@ -54,5 +75,3 @@ var create = function (req, res, query) {
 	res.write(page);
 	res.end();
 };
-
-module.exports = create;
