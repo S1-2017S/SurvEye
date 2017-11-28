@@ -50,7 +50,7 @@ Ou affichage erreur dans le page test sondage
 		
 		fichier_sondage = fs.readFileSync("./"+query.id+"t.json", "utf-8");
 		fichier_sondage = JSON.parse(fichier_sondage);
-		fichier_sondage.ids = query.sondage;
+		fichier_sondage.ids = [];
 		chaine = JSON.stringify(fichier_sondage);		
 		fs.writeFileSync("./"+query.sondage+".json", chaine, "utf-8");
 
