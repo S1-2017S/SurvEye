@@ -4,7 +4,7 @@ Auteur : Thomas
 Version : 21/11/2017 09:47
 ===============================================================================================*/
 
-"use strict"
+"use strict";
 var fs = require('fs');
 var remedial = require("remedial");
 

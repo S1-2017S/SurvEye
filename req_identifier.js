@@ -2,7 +2,7 @@
 //=========================================================================
 // Traitement de "req_identifier"
 // Auteur : Robin
-// Version : 15/11/2017
+// Version : 28/11/2017
 //=========================================================================
 
 "use strict";
@@ -25,6 +25,10 @@ var connexion = function (req, res, query) {
 	contenu_fichier = fs.readFileSync("membres.json", 'utf-8');
 	listeMembres = JSON.parse(contenu_fichier);
 
+/*
+Recherche de l'ID du user
+*/
+
 	trouve = false;
 	i = 0;
 	while(i<listeMembres.length && trouve === false) {
@@ -35,7 +39,9 @@ var connexion = function (req, res, query) {
 		}
 		i++;
 	}
-
+/*
+Affichage dépendant du résultat de la recherche
+*/
 	if(trouve === false) {
 	
 		page = fs.readFileSync('modele_accueil.html', 'utf-8');

@@ -58,5 +58,5 @@ Suppression du sondage
 	res.write(page);
 	res.end();
 };
-
+//Bonjour c'est un test
 module.exports = confirm_del;

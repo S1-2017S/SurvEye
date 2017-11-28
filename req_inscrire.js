@@ -1,7 +1,7 @@
 //=========================================================================
 // Traitement de "req_inscrire"
 // Auteur : T.Cousin
-// Version : 15/11/17
+// Version : 28/11/17
 //=========================================================================
 
 "use strict";
@@ -14,17 +14,22 @@ var trait = function (req, res, query) {
 	var marqueurs;
 	var id;
 	var password;
-	var confirm;				//VARIABLE_VERIFICATION_MDP
-	var registered;				//VARIABLE_CONFIRMATION_INSCRIPTION
+	var confirm;													//VARIABLE_VERIFICATION_MDP
+	var registered;													//VARIABLE_CONFIRMATION_INSCRIPTION
 	var page;
-	var nouveauMembre;
 	var contenu_fichier;
+	var nouveauMembre;
 	var listeMembres;
 	var i;
 	var trouve;
+	var profils;
+	var listeProfils; 
+	var nouveauProfil;
 
-	contenu_fichier = fs.readFileSync("membres.json", 'utf-8');    // LECTURE
+	contenu_fichier = fs.readFileSync("membres.json", 'utf-8');     // LECTURE
 	listeMembres = JSON.parse(contenu_fichier);
+	profils = fs.readFileSync("profils.json",'utf-8');
+	listeProfils = JSON.parse(profils);
 
 	trouve = false;
 	i = 0;
@@ -37,20 +42,31 @@ var trait = function (req, res, query) {
 
 
 	registered = false;
-	if(trouve === false) {
+	if(trouve === false) {											//SI PAS DE COMPTE CREATION COMPTE ET PROFIL
 
 		if (query.password === query.confirm) {
 			nouveauMembre = {};
+			nouveauProfil = {};
+
 			nouveauMembre.id = query.id;
 			nouveauMembre.password = query.password;
+
+			nouveauProfil.id = query.id;
+			nouveauProfil.sondageuser = [];
+			nouveauProfil.sondageguest = [];
+
 			listeMembres[listeMembres.length] = nouveauMembre;
+			listeProfils[listeProfils.length] = nouveauProfil;
+
 			registered = true;
 
-			contenu_fichier = JSON.stringify(listeMembres);
-		
+			contenu_fichier = JSON.stringify(listeMembres);		
 			fs.writeFileSync("membres.json", contenu_fichier, 'utf-8');
 
-		} else if (query.password !== query.confirm) {
+			profils = JSON.stringify(listeProfils);
+			fs.writeFileSync("profils.json",profils,'utf-8');
+
+		} else if (query.password !== query.confirm) {				//CONFIRMATION PW INVALIDE
 			page = fs.readFileSync('modele_formulaire_inscription.html', 'utf-8');
 
 			marqueurs = {};
@@ -59,7 +75,7 @@ var trait = function (req, res, query) {
 			page = page.supplant(marqueurs);
 		}
 
-	} else if (trouve === true) {
+	} else if (trouve === true) {									//COMPTE DEJA EXISTANT
 
 			page = fs.readFileSync('modele_formulaire_inscription.html', 'utf-8');
 

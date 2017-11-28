@@ -22,8 +22,19 @@
             <input type="text" name="8"><br>
             <input type="text" name="9"><br><p>
             <input type="submit" name="p" value="Valider">
-            <input type="submit" name="p" value="Finir">
+        </p>
         </form>
+
+        <form = action="/req_valider_sondage" method="GET">
+            <input type="submit" name="finir" value="Valider sondage">
+            <input type="hidden" name="id" value="{id}">            
+        </form>
+
+        <form action="req_retour_accueil_membre" method="GET">
+            <input type="submit" name="retour" value="Retour accueil">
+            <input type="hidden" name="id" value="{id}">
+        </form>
+
         <form action="/req_tester_sondage" method="GET">            
             <input type="submit" name="p" value="Tester">
             <input type="hidden" name="id" value="{id}">
