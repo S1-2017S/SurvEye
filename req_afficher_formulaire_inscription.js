@@ -1,7 +1,7 @@
 //=========================================================================
 // Traitement de "req_afficher_formulaire_inscription"
-// Auteur : P. Thiré
-// Version : 09/10/2015
+// Auteur : Groupe SurvEye
+// Version : 29/11/2017
 //=========================================================================
 "use strict";
 
