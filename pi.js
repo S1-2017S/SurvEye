@@ -35,6 +35,7 @@ var req_retour_accueil_membre = require("./req_retour_accueil_membre.js");
 var req_valider_reponse = require("./req_valider_reponse.js");
 var valider = require("./valider.js");
 var req_valider_sondage = require("./req_valider_sondage.js");
+var req_deconnexion = require("./req_deconnexion.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -116,6 +117,9 @@ var traite_requete = function (req, res) {
 				break;
 			case'/req_valider_sondage':
 				req_valider_sondage(req, res, query);
+				break;
+			case '/req_deconnexion':
+				req_deconnexion(req, res, query);
 				break;
 			default:
 				req_static(req, res, query);
