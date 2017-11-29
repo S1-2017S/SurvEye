@@ -1,6 +1,6 @@
 
 //=========================================================================
-// Traitement de validation d'ajout de question
+// Traitement du cas "valider question"
 // Auteur : R.LAGNY
 // Version : 29/11/2017
 //=========================================================================

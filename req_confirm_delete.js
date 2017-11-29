@@ -1,7 +1,7 @@
 /*===============================================================================================
-suppression du sondage
+Traitement du cas "supprimer"
 Auteur : Thomas
-Version : 21/11/2017 09:47
+Version : 29/11/2017
 ===============================================================================================*/
 
 "use strict"
@@ -14,7 +14,10 @@ var confirm_del = function (req,res,query) {
 	var contenu_fichier;
 	var i;
 	var j;
+	var k;
 	var sondage = String(query.sondage);
+	var trouve;
+	var liste;
 
 /*===============================================================================================
 Suppression du sondage
@@ -23,13 +26,17 @@ Suppression du sondage
 	contenu_fichier = fs.readFileSync("./profils.JSON","utf-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 
+	liste = fs.readFileSync("./liste.json");
+	liste = JSON.parse(liste);
+
 	page = fs.readFileSync("./res_confirm_action_sondage.html","utf-8");
 	marqueurs = {};
 
 	if (query.delete === "oui") {
+		
 		i = 0;
-		while (contenu_fichier[i].id != query.id && i<contenu_fichier.length) {
-			i++
+		while (contenu_fichier[i].id !== query.id && i<contenu_fichier.length) {
+			i++;
 		}
 
 		for (j = 0; j < contenu_fichier[i].sondageuser.length; j++) {
@@ -38,9 +45,31 @@ Suppression du sondage
 			}
 		}
 
+		for (i = 0; i < contenu_fichier.length; i++) {
+			k = 0;
+			trouve = false;
+			while (trouve === false && k < contenu_fichier[i].sondageguest.length) {
+				if (contenu_fichier[i].sondageguest[k] === query.sondage) {
+					contenu_fichier[i].sondageguest.splice(k, 1);
+					trouve = true;
+				}else k++;
+			}			
+		}
+		
+		for (i = 0; i < liste.length; i++) {
+			if (liste[i] === sondage) {
+				liste.splice(i,1);
+			}
+		}
+
+		fs.unlinkSync(query.sondage+'.JSON');
+
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./profils.JSON",contenu_fichier,"utf-8");
-		
+
+		liste = JSON.stringify(liste);
+		fs.writeFileSync("./liste.json",liste,"utf-8");
+
 		marqueurs.confirm = "Votre sondage "+sondage+" a bien été supprimé";
 
 	}else if (query.delete === "non") {
