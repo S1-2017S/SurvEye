@@ -1,7 +1,7 @@
 /*===============================================================================================
 Traitement de "req_confirmer_creation_sondage"
 Auteur : Robin
-Version : 28/11/2017
+Version : 29/11/2017
 ===============================================================================================*/
 
 "use strict"
@@ -12,69 +12,84 @@ var create = function (req, res, query) {
 	var marqueurs;
 	var page;
 	var contenu_fichier;
-	var chaine = [];
 	var i;
-	var j;
-	var trouve_id = false;
-	var trouve_sondage = false;
+	var trouve;
+	var liste;
 	var fichier_sondage;
-
-	chaine = JSON.stringify(chaine);
-	fs.writeFileSync(query.sondage+".json", chaine, "UTF-8" );
+	/*
+	Vérification si l'id du user et du nom du sondage existent dans profils.json
+	*/
 	
 	contenu_fichier = fs.readFileSync("./profils.json", "UTF-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
-/*
-Vérification si l'id du user et du nom du sondage existent dans profils.json
-*/
-	i = 0;
-	while (trouve_id === false && i < contenu_fichier.length) {
-		if(query.id === contenu_fichier[i].id) {
-			trouve_id = true;
-			j = 0;
-			while (trouve_sondage === false && j < contenu_fichier[i].sondageuser.length) {
-				if(query.sondage === contenu_fichier[i].sondageuser[j]) {
-					trouve_sondage = true;
-				}
-				j++
-			}
-		}	
-		i++
-	};
-/*
-Création du sondage et redirection vers la page de confirmation
-Ou affichage erreur dans le page test sondage
-*/
-	if (trouve_id === true && trouve_sondage === false) {
-		contenu_fichier[i-1].sondageuser.push(query.sondage);
-		
-		fichier_sondage = fs.readFileSync("./"+query.id+"t.json", "utf-8");
-		fichier_sondage = JSON.parse(fichier_sondage);
-		fichier_sondage.ids = query.sondage;
-		chaine = JSON.stringify(fichier_sondage);		
-		fs.writeFileSync("./"+query.sondage+".json", chaine, "utf-8");
 
-		page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
+	i = 0;
+	trouve = false;
+	while (trouve === false && i < contenu_fichier.length) {
+		if(query.id === contenu_fichier[i].id) {
+			trouve = true;
+		}	
+		else i++;
+	};
+	/*
+	Création du sondage et redirection vers la page de confirmation
+	Ou affichage erreur dans le page test sondage
+	*/
+
+		//On vérifie que le sondage n'existe pas déjà dans la base de données
+
+		liste = fs.readFileSync("./liste.json","utf-8");
+		liste = JSON.parse(liste);
+		i = 0;
+		trouve = false;
+		console.log(liste);
+		while(trouve === false && i < liste.length) {
+			console.log(liste[i]);
+			if(liste[i] === query.sondage) {
+				trouve = true;
+			}else i++;
+		}
+		console.log(trouve);
+
+	if(trouve === false) {
+		//On enregistre le sondage dans ceux de l'user
+		
+		contenu_fichier[i].sondageuser.push(query.sondage);
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./profils.json",contenu_fichier,"utf-8");
 
+		//On enregistre le nom du sondage dans la base de données
+
+		liste.push(query.sondage);
+		liste = JSON.stringify(liste);
+		fs.writeFileSync("./liste.json", liste,"utf-8");
+
+		//On créer le fichier du sondage 
+
+		fichier_sondage = fs.readFileSync("./"+query.id+"t.json", "utf-8");
+		fichier_sondage = JSON.parse(fichier_sondage);
+		fichier_sondage = JSON.stringify(fichier_sondage);		
+		fs.writeFileSync("./"+query.sondage+".json", fichier_sondage, "utf-8");
+		
+		//On construit la page de confirmation
+
+		page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
 		marqueurs = {};
-		marqueurs.nom = query.sondage;
+		marqueurs.id = query.id;
 		marqueurs.confirm = "crée";
 		marqueurs.direction = "accueil membre";
-		marqueurs.id = query.id;
+		marqueurs.sondage = query.sondage;
 
-	} else if (trouve_id === false) {
-		page = fs.readFileSync("./res_valider_sondage.html","utf-8");		
-		marqueurs = {};
-		marqueurs.erreur = "mauvais id";
-		marqueurs.id = query.id;
 
-	} else if (trouve_sondage === true) {
-		page = fs.readFileSync("./res_valider_sondage.html","utf-8");		
+	}else if(trouve === true) {
+		
+		//On construit la page d'erreur
+
+		page = fs.readFileSync("./res_valider_sondage.html","utf-8");
 		marqueurs = {};
-		marqueurs.erreur = "Nom déjà pris."
 		marqueurs.id = query.id;
+		marqueurs.erreur = "Erreur : ce sondage existe déjà, veuillez choisir un autre nom.";
+
 	}
 
 	page = page.supplant(marqueurs);
