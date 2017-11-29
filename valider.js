@@ -1,8 +1,8 @@
 
 //=========================================================================
-// Traitement de validation d'ajout de question
+// Traitement du cas "valider question"
 // Auteur : R.LAGNY
-// Version : 16/11/2017
+// Version : 29/11/2017
 //=========================================================================
 "use strict";
 

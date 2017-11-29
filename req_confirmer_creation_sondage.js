@@ -72,6 +72,9 @@ var create = function (req, res, query) {
 		fs.writeFileSync("./"+query.sondage+".json", fichier_sondage, "utf-8");
 		
 		//On construit la page de confirmation
+		fichier_sondage.ids = [];
+		chaine = JSON.stringify(fichier_sondage);		
+		fs.writeFileSync("./"+query.sondage+".json", chaine, "utf-8");
 
 		page = fs.readFileSync("./res_confirmation_creation.html","utf-8");
 		marqueurs = {};
