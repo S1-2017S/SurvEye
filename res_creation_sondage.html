@@ -9,9 +9,9 @@
         <h3>{question}</h3>
         <form action="/req_editer_sondage" method="GET">
             <input type="hidden" name="id" value="{id}">
-            <input type="text" name="q">
+            <input type="text" name="q">{erreurQ}
             <br><p>
-            <input type="text" name="0"><br>
+            <input type="text" name="0">{erreurR}<br>
             <input type="text" name="1"><br>
             <input type="text" name="2"><br>
             <input type="text" name="3"><br>
