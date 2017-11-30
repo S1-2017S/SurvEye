@@ -11,16 +11,19 @@
 		<h2><center>SurvEye</center></h2>
 		Bonjour, {id}
 		<p>
-		<form action="/req_consulter_sondages" method="GET">
-			<button name="action" value="consulter">Mes sondages</button><p>
-			<input type="hidden" name="id" value="{id}">
-		</form>
-		<form action="/req_creer_un_sondage" method="GET">
-			<button name="action" value="creer">Créer un sondage</button>
-			<input type="hidden" name="id" value="{id}">
-		</form>
-		<form action="/req_deconnexion" method="GET">
-			<button name="action" value="deconnexion">Déconnexion</button>
-		</form>
+			<form action="/req_consulter_sondages" method="GET">
+				<button name="action" value="consulter">Mes sondages</button><p>
+				<input type="hidden" name="id" value="{id}">
+			</form>
+
+			<form action="/req_creer_un_sondage" method="GET">
+				<button name="action" value="creer">Créer un sondage</button><p>
+				<input type="hidden" name="id" value="{id}">
+			</form>
+
+			<form action="/req_deconnexion" method="GET">
+				<button name="action" value="deconnexion">Déconnexion</button>
+			</form>
+		</p>
 	</body>
 </html>

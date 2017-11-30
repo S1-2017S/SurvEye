@@ -39,13 +39,17 @@ Suppression du sondage
 			i++;
 		}
 
+		//Suppression du sondage chez le créateur dans ses sondages
+
 		for (j = 0; j < contenu_fichier[i].sondageuser.length; j++) {
 			if (query.sondage === contenu_fichier[i].sondageuser[j]) {
 				contenu_fichier[i].sondageuser.splice(j, 1);
 			}
 		}
 
-		for (i = 0; i < contenu_fichier.length; i++) {
+		//Suppression du sondage chez tous les utilisateurs invités à ce sondage
+
+		for (i = 0; i < contenu_fichier.length; i++) {				
 			k = 0;
 			trouve = false;
 			while (trouve === false && k < contenu_fichier[i].sondageguest.length) {
@@ -56,13 +60,15 @@ Suppression du sondage
 			}			
 		}
 		
-		for (i = 0; i < liste.length; i++) {
+		//Suppression du sondage de la liste des sondages
+
+		for (i = 0; i < liste.length; i++) {						
 			if (liste[i] === sondage) {
 				liste.splice(i,1);
 			}
 		}
 
-		fs.unlinkSync(query.sondage+'.JSON');
+		fs.unlinkSync(query.sondage+'.JSON'); 						//Suppression du fichier "sondage".json
 
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./profils.JSON",contenu_fichier,"utf-8");
