@@ -68,7 +68,7 @@ var trait = function(req,res,query) {
             }
             page = page.supplant(marqueurs);
         }
-    }else {
+    }else if(contenu_fichier.etat === "closed") {
         page = fs.readFileSync("./res_resultats_sondages.html", "utf-8");
         marqueurs = {};
         marqueurs.id = query.id;
