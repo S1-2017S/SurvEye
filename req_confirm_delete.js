@@ -23,7 +23,7 @@ var confirm_del = function (req,res,query) {
 Suppression du sondage
 ===============================================================================================*/
 	
-	contenu_fichier = fs.readFileSync("./profils.JSON","utf-8");
+	contenu_fichier = fs.readFileSync("./profils.json","utf-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 
 	liste = fs.readFileSync("./liste.json");
@@ -68,10 +68,10 @@ Suppression du sondage
 			}
 		}
 
-		fs.unlinkSync(query.sondage+'.JSON'); 						//Suppression du fichier "sondage".json
+		fs.unlinkSync(query.sondage+'.json'); 						//Suppression du fichier "sondage".json
 
 		contenu_fichier = JSON.stringify(contenu_fichier);
-		fs.writeFileSync("./profils.JSON",contenu_fichier,"utf-8");
+		fs.writeFileSync("./profils.json",contenu_fichier,"utf-8");
 
 		liste = JSON.stringify(liste);
 		fs.writeFileSync("./liste.json",liste,"utf-8");
