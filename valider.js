@@ -9,7 +9,7 @@
 var fs = require("fs");
 require("remedial");
 
-var trait = function(req,res,query) {
+var histo = function(req,res,query) {
     var page;
     var marqueurs;
     var contenu_fichier;
@@ -66,7 +66,7 @@ var trait = function(req,res,query) {
 		marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
 
 		for(i = 0; i < contenu_fichier.questions.length; i++) {
-			marqueurs.histo += '<a href ="req_historique?question='+i+'">'+"Question "+(i+1)+" : "+(contenu_fichier.questions[i])+'</a> <br>';
+			marqueurs.histo += '<a href ="req_historique?question='+i+'&id='+query.id+'">'+"Question "+(i+1)+" : "+(contenu_fichier.questions[i])+'</a> <br>';
 		}
 
 		contenu_fichier = JSON.stringify(contenu_fichier);
@@ -79,4 +79,4 @@ var trait = function(req,res,query) {
 	res.end();
 
 }
-module.exports = trait;
+module.exports = histo;
