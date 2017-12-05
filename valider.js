@@ -36,12 +36,6 @@ var trait = function(req,res,query) {
 		marqueurs.histo += '<a href = ta mère la tchoin>'+"Question "+(contenu_fichier.questions.length)+" : "+(contenu_fichier.questions[i])+'</a> <br>';
 	}
 
-	if(query.q === "") {
-		marqueurs.suppress = "";
-	}else {
-		marqueurs.suppress = '<input type="submit" name="suppr" value="Supprimer"';
-	}
-
 	for(i = 0; i < 10; i ++) {
 		if(query[String(i)] !== "") {
 			reponses.push(query[String(i)]);
