@@ -33,10 +33,8 @@ var histo = function(req,res,query) {
 	compteur = 0;
 	marqueurs.histo = "";	
 	
-	if(query.q === "") {
-		marqueurs.suppress = "";
-	}else {
-		marqueurs.suppress = '<input type="submit" name="suppr" value="Supprimer"';
+	for(i = 0; i < contenu_fichier.questions.length; i++) {
+		marqueurs.histo += '<a href = ta mère la tchoin>'+"Question "+(contenu_fichier.questions.length)+" : "+(contenu_fichier.questions[i])+'</a> <br>';
 	}
 
 	for(i = 0; i < 10; i ++) {
