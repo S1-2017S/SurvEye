@@ -36,7 +36,6 @@ var trait = function (req, res, query) {
 	marqueurs.id = query.id;
 	marqueurs.erreurQ = "";
 	marqueurs.erreurR = "";
-	marqueurs.histo = "";
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
