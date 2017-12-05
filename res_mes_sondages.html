@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
-
+<head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<header class="row">
+	<div class="col-lg-12">
+		<h2>Mes sondages</h2>
+	</div>
+</header>
+<div class="row">
 
-<h2>Mes sondages</h2> 
-
-<br>
-<form action="req_retour_accueil_membre" method="GET">
+<form class="col-md-3 col-md-offset-2" action="req_retour_accueil_membre" method="GET">
     Retour à l'accueil <br>
     <input type="hidden" name="id" value="{id}">
     <input type="submit" name="bouton" value="Accueil">
@@ -14,7 +21,7 @@
 
 <br>
 
-<form action="req_traiter_sondage" method="GET">
+<form class="col-md-3 col-md-offset-2" action="req_traiter_sondage" method="GET">
     Mes sondages : <br>
     <select name="sondage">
         {liste}
