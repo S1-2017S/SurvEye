@@ -27,7 +27,7 @@ Ouverture du sondage
 //===============================================================================================
 
 	marqueurs = {};
-	marqueurs.confirm = "ouvert";
+	marqueurs.confirm = "Votre sondage "+query.sondage+" a bien été ouvert";
 	marqueurs.nom = query.sondage;
 	marqueurs.id = query.id;
 	marqueurs.direction = "'mes sondages'";

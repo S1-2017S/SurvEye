@@ -27,7 +27,7 @@ Fermeture du sondage
 //===============================================================================================
 
 	marqueurs = {};
-	marqueurs.confirm = "votre sondage",query.sondage,"a bien été fermé";
+	marqueurs.confirm = "Votre sondage "+query.sondage+" a bien été fermé";
 	marqueurs.id = query.id;
 	marqueurs.direction = "'Mes sondages'";
 
