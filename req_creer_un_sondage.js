@@ -31,7 +31,8 @@ var trait = function (req, res, query) {
 
 	marqueurs = {};
 	marqueurs.question = "Question 1";
-	marqueurs.supress = "";
+	marqueurs.histo = "";
+	marqueurs.suppress = "";
 	marqueurs.id = query.id;
 	marqueurs.erreurQ = "";
 	marqueurs.erreurR = "";
