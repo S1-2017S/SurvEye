@@ -52,6 +52,18 @@ var create = function (req, res, query) {
 		console.log(trouve);
 
 	if(trouve === false) {
+		contenu_fichier = fs.readFileSync("./profils.json", "UTF-8");
+		contenu_fichier = JSON.parse(contenu_fichier);
+
+		i = 0;
+		trouve = false;
+		while (trouve === false && i < contenu_fichier.length) {
+			if(query.id === contenu_fichier[i].id) {
+				trouve = true;
+			}	
+			else i++;
+		};
+	
 		//On enregistre le sondage dans ceux de l'user
 		
 		contenu_fichier[i].sondageuser.push(query.sondage);
