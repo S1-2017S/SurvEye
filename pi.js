@@ -27,10 +27,8 @@ var del = require("./delete.js");
 var confirm_del = require("./req_confirm_delete.js");
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
-var req_tester_sondage = require("./req_tester_sondage.js");
 var req_ajouter_une_question = require("./req_ajouter_une_question.js");
 var req_confirmer_creation_sondage = require("./req_confirmer_creation_sondage.js");
-var req_terminer_test = require("./req_terminer_test.js");
 var req_retour_accueil_membre = require("./req_retour_accueil_membre.js");
 var req_valider_reponse = require("./req_valider_reponse.js");
 var valider = require("./valider.js");
@@ -112,14 +110,8 @@ var traite_requete = function (req, res) {
 			case '/req_ajouter_une_question':
 				req_ajouter_une_question(req, res, query);
 				break;
-			case '/req_tester_sondage':
-				req_tester_sondage(req, res, query);
-				break;
 			case '/req_confirmer_creation_sondage':
 				req_confirmer_creation_sondage(req, res, query);
-				break;
-			case'/req_terminer_test':
-				req_terminer_test(req, res, query);
 				break;
 			case'/req_retour_accueil_membre':
 				req_retour_accueil_membre(req, res, query);
