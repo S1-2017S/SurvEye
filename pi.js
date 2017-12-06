@@ -93,6 +93,8 @@ var traite_requete = function (req, res) {
 					valider(req,res,query);
 				}else if (query.p === "Supprimer") {
 					supprimer(req, res, query);
+				}else if (query.p === "Valider sondage") {
+					req_valider_sondage(req, res, query);
 				}
 				break;
 			case '/req_historique' :
@@ -121,9 +123,6 @@ var traite_requete = function (req, res) {
 				break;
 			case'/req_retour_accueil_membre':
 				req_retour_accueil_membre(req, res, query);
-				break;
-			case'/req_valider_sondage':
-				req_valider_sondage(req, res, query);
 				break;
 			case '/req_deconnexion':
 				req_deconnexion(req, res, query);
