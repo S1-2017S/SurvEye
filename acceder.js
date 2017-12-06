@@ -48,7 +48,6 @@ var trait = function(req,res,query) {
                     }
                 }
                 for(x = 0; x < contenu_fichier.answers[i].length; x++) {
-                    console.log(contenu_fichier.reponses[i][x]);
                     marqueurs.results += contenu_fichier.reponses[i][x]+"<img src='./barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%><br>";
                 }
             }
@@ -82,7 +81,6 @@ var trait = function(req,res,query) {
                 }
             }
             for(x = 0; x < contenu_fichier.answers[i].length; x++) {
-                console.log(contenu_fichier.reponses[i][x]);
                 marqueurs.results += contenu_fichier.reponses[i][x]+"<img src='./barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%><br>";
             }
         }

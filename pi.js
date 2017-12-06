@@ -137,5 +137,5 @@ var traite_requete = function (req, res) {
 
 var mon_serveur = http.createServer(traite_requete);
 var port = 5000;
-console.log("Olivier suce " + port + " bites");
+console.log("En écoute sur " + port);
 mon_serveur.listen(port);
