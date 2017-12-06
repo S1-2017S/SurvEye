@@ -36,6 +36,8 @@ var req_valider_reponse = require("./req_valider_reponse.js");
 var valider = require("./valider.js");
 var req_valider_sondage = require("./req_valider_sondage.js");
 var req_deconnexion = require("./req_deconnexion.js");
+var req_historique = require("./req_historique.js");
+var supprimer = require("./supprimer.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -89,7 +91,12 @@ var traite_requete = function (req, res) {
 			case '/req_editer_sondage' :
 				if(query.p === "Valider") {
 					valider(req,res,query);
+				}else if (query.p === "Supprimer") {
+					supprimer(req, res, query);
 				}
+				break;
+			case '/req_historique' :
+				req_historique(req, res, query);
 				break;
 			case '/req_confirm_delete' :
 				confirm_del(req, res, query);
@@ -139,5 +146,5 @@ var traite_requete = function (req, res) {
 
 var mon_serveur = http.createServer(traite_requete);
 var port = 5000;
-console.log("Serveur en ecoute sur port " + port);
+console.log("Olivier suce " + port + " bites");
 mon_serveur.listen(port);

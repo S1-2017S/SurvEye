@@ -9,7 +9,7 @@
 var fs = require("fs");
 require("remedial");
 
-var trait = function(req,res,query) {
+var histo = function(req,res,query) {
     var page;
     var marqueurs;
     var contenu_fichier;
@@ -30,16 +30,11 @@ var trait = function(req,res,query) {
     reponses = [];
 	marqueurs.erreurQ = "";
 	marqueurs.erreurR = "";
-	compteur = 0;	
+	compteur = 0;
+	marqueurs.histo = "";	
 	
 	for(i = 0; i < contenu_fichier.questions.length; i++) {
 		marqueurs.histo += '<a href = ta mère la tchoin>'+"Question "+(contenu_fichier.questions.length)+" : "+(contenu_fichier.questions[i])+'</a> <br>';
-	}
-
-	if(query.q === "") {
-		marqueurs.suppress = "";
-	}else {
-		marqueurs.suppress = '<input type="submit" name="suppr" value="Supprimer"';
 	}
 
 	for(i = 0; i < 10; i ++) {
@@ -60,8 +55,6 @@ var trait = function(req,res,query) {
 		contenu_fichier.reponses.push(reponses);
 		contenu_fichier.answers.push([]);
 		i = 0;
-		console.log(contenu_fichier.answers);
-		console.log(contenu_fichier.questions.length-1);
 		while(i < reponses.length) {
 			 if(query[String(i)] !== "") {
 			 	contenu_fichier.answers[contenu_fichier.questions.length-1].push(0);
@@ -70,14 +63,18 @@ var trait = function(req,res,query) {
 		}
 		marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
 
+		for(i = 0; i < contenu_fichier.questions.length; i++) {
+			marqueurs.histo += '<a href ="req_historique?question='+i+'&id='+query.id+'">'+"Question "+(i+1)+" : "+(contenu_fichier.questions[i])+'</a> <br>';
+		}
+
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./"+query.id+"t.json", contenu_fichier, "utf-8");
-    }
-
+	}
+	
 	page = page.supplant(marqueurs);
     res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write(page);
 	res.end();
 
 }
-module.exports = trait;
+module.exports = histo;
