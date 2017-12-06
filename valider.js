@@ -33,10 +33,6 @@ var histo = function(req,res,query) {
 	compteur = 0;
 	marqueurs.histo = "";	
 	
-	for(i = 0; i < contenu_fichier.questions.length; i++) {
-		marqueurs.histo += '<a href = ta mère la tchoin>'+"Question "+(contenu_fichier.questions.length)+" : "+(contenu_fichier.questions[i])+'</a> <br>';
-	}
-
 	for(i = 0; i < 10; i ++) {
 		if(query[String(i)] !== "") {
 			reponses.push(query[String(i)]);
