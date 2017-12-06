@@ -16,6 +16,7 @@ var trait = function(req,res,query) {
     var z;
     var x;
     var t;
+    var nb_reponses;
 
     contenu_fichier = fs.readFileSync("./"+query.sondage+".json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
@@ -34,19 +35,19 @@ var trait = function(req,res,query) {
     marqueurs.results = "";
     nb_reponses = 0;
     for(i = 0; i < contenu_fichier.answers.length; i++) {
-        marqueurs.results += "<h2>"+contenu_fichier.question[i]+"</h2><br>";
+        marqueurs.results += "<h2>"+contenu_fichier.questions[i]+"</h2><br>";
         for(x = 0; x < contenu_fichier.answers[i].length; x++) {
 	    if(contenu_fichier.answers[i][x] !== 0) {
 		nb_reponses += contenu_fichier.answers[i][x];
 	    }
 	}
 	for(x = 0; x < contenu_fichier.answers[i].length; x++) {
-	    marqueurs.results += contenu_fichier.reponses[i][x]+"<img src='./barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nbreponses)*100+"%><br>";
+	    marqueurs.results += contenu_fichier.reponses[i][x]+"<img src='./barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%><br>";
 	}
     }
-    contenu_fichies = JSON.stringify(contenu_fichier);
+    contenu_fichier = JSON.stringify(contenu_fichier);
     fs.writeFileSync("./"+query.sondage+".json", contenu_fichier);
-
+    page = page.supplant(marqueurs);
     res.writeHead(200, {"Content-Type" : "text/html"});
     res.write(page);
     res.end();

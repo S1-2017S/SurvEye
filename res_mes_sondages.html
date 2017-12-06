@@ -12,38 +12,33 @@
 	</div>
 </header>
 <div class="row">
-
-<form class="col-md-3 col-md-offset-2" action="req_retour_accueil_membre" method="GET">
-    Retour à l'accueil <br>
-    <input type="hidden" name="id" value="{id}">
-    <input type="submit" name="bouton" value="Accueil">
-</form>
-
-<br>
-
-<form class="col-md-3 col-md-offset-2" action="req_traiter_sondage" method="GET">
+<form class="form-group col-md-3 col-md-offset-2" action="req_traiter_sondage" method="GET">
     Mes sondages : <br>
-    <select name="sondage">
+    <select class="form-control" name="sondage">
         {liste}
-    <select>
+    </select>
 	<p>
     <input type="hidden" value="{id}" name="id">
-    <input type="submit" name="bouton" value="Acceder">
-    <input type="submit" name="bouton" value="Fermer">
-    <input type="submit" name="bouton" value="Ouvrir">
-    <input type="submit" name="bouton" value="Supprimer">
+    <input class="btn" type="submit" name="bouton" value="Acceder">
+    <input class="btn" type="submit" name="bouton" value="Fermer">
+    <input class="btn" type="submit" name="bouton" value="Ouvrir">
+    <input class="btn" type="submit" name="bouton" value="Supprimer">
 </form>
-
-<br>
-
-<form action="req_traiter_sondage" method="GET">
+<form class="form-group col-md-3 col-md-offset-2" action="req_traiter_sondage" method="GET">
     <input type="hidden" value="{id}" name="id">
     Sondages disponibles : <br>
-    <select name="sondage">
+    <select class="form-control" name="sondage">
         {liste2}
-    <select>
+    </select>
 	<p>
-    <input type="submit" name="bouton" value="Acceder">
+    <input class="btn" type="submit" name="bouton" value="Acceder">
 </form>
-
+</div>
+<div class="row">
+<form class="col-lg-12" action="req_retour_accueil_membre" method="GET">
+    Retour à l'accueil <br>
+    <input type="hidden" name="id" value="{id}">
+    <input class="btn btn-primary"type="submit" name="bouton" value="Accueil">
+</form>
+</div>
 </html>
