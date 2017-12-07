@@ -7,8 +7,10 @@
         <center><h2>Créez votre sondage !</h2></center>
         {histo}
         <h3>{question}</h3>
+        
         <form action="/req_editer_sondage" method="GET">
             <input type="hidden" name="id" value="{id}">
+            <input type="hidden" name="numero" value="{indice}">
             <input type="text" value="{q}" name="q">{erreurQ}
             <br><p>
             <input type="text" value="{0}" name="0">{erreurR}<br>

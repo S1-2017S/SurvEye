@@ -25,6 +25,7 @@ var trait = function(req,res,query) {
 	marqueurs.erreurR = "";
 	marqueurs.id = query.id;
 	marqueurs.q = contenu_fichier.questions[query.question];
+	marqueurs.indice = query.question;
 	i = 0;
 	do {
 		if(contenu_fichier.reponses[query.question][i] !== "") {

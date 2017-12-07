@@ -31,7 +31,7 @@ var histo = function(req,res,query) {
 	marqueurs.erreurQ = "";
 	marqueurs.erreurR = "";
 	compteur = 0;
-	marqueurs.histo = "";	
+	marqueurs.histo = "";
 	
 	for(i = 0; i < 10; i ++) {
 		if(query[String(i)] !== "") {
@@ -47,9 +47,15 @@ var histo = function(req,res,query) {
 		marqueurs.erreurR = "Vous devez mettre au minimum 2 réponses"
 		marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
 	} else {
-		contenu_fichier.questions.push(question);
-		contenu_fichier.reponses.push(reponses);
-		contenu_fichier.answers.push([]);
+		if(contenu_fichier.questions[query.numero] !== "") {
+			contenu_fichier.questions[query.numero] = question;
+			contenu_fichier.reponses[query.numero] = reponses;
+		}else {
+			contenu_fichier.questions.push(question);
+			contenu_fichier.reponses.push(reponses);
+			contenu_fichier.answers.push([]);
+		}
+		
 		i = 0;
 		while(i < reponses.length) {
 			 if(query[String(i)] !== "") {
@@ -65,6 +71,11 @@ var histo = function(req,res,query) {
 
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./"+query.id+"t.json", contenu_fichier, "utf-8");
+	}
+	
+	marqueurs.q = "";
+	for(i = 0; i < 10; i++) {
+		marqueurs[String(i)] = "";
 	}
 	
 	page = page.supplant(marqueurs);

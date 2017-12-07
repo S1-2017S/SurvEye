@@ -23,6 +23,7 @@ var trait = function (req, res, query) {
 	contenu_fichier.answers = [];
 	marqueurs = {};
 
+	marqueurs.indice = 0;
 	marqueurs.q = "";
 	for(i = 0; i < 10; i++) {
 		marqueurs[String(i)] = "";
