@@ -14,9 +14,12 @@ var create = function (req, res, query) {
 	var contenu_fichier;
 	var i;
 	var j;
+	var k;
 	var trouve;
 	var liste;
 	var fichier_sondage;
+	var erreur;
+
 	/*
 	Vérification si l'id du user et du nom du sondage existent dans profils.json
 	*/
@@ -50,8 +53,37 @@ var create = function (req, res, query) {
 				trouve = true;
 			}else j++;
 		}
+		
+		//On vérifie qu'il si il y a des espaces de le nom du sondage
 
-	if(trouve === false) {
+	erreur = false
+	for(k = 0; k < query.sondage.length; k++) {
+		console.log(query.sondage[k])
+		if(query.sondage[k] === " ") {
+			erreur = true;
+		}
+	}
+
+	if(erreur === true) {
+	
+	//On construit la page d'erreur
+
+		page = fs.readFileSync("./res_valider_sondage.html","utf-8");
+		marqueurs = {};
+		marqueurs.id = query.id;
+		marqueurs.erreur = "Erreur : les espaces ne sont pas autorisés dans le nom du sondage.";
+	
+	}else if(trouve === true) {
+		
+		//On construit la page d'erreur
+
+		page = fs.readFileSync("./res_valider_sondage.html","utf-8");
+		marqueurs = {};
+		marqueurs.id = query.id;
+		marqueurs.erreur = "Erreur : ce sondage existe déjà, veuillez choisir un autre nom.";
+	
+	} else if(trouve === false) {
+	
 		contenu_fichier = fs.readFileSync("./profils.json", "UTF-8");
 		contenu_fichier = JSON.parse(contenu_fichier);
 
@@ -91,17 +123,6 @@ var create = function (req, res, query) {
 		marqueurs.confirm = "crée";
 		marqueurs.direction = "accueil membre";
 		marqueurs.sondage = query.sondage;
-
-
-	}else if(trouve === true) {
-		
-		//On construit la page d'erreur
-
-		page = fs.readFileSync("./res_valider_sondage.html","utf-8");
-		marqueurs = {};
-		marqueurs.id = query.id;
-		marqueurs.erreur = "Erreur : ce sondage existe déjà, veuillez choisir un autre nom.";
-
 	}
 
 	page = page.supplant(marqueurs);
