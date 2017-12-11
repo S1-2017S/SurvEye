@@ -13,6 +13,7 @@ var create = function (req, res, query) {
 	var page;
 	var contenu_fichier;
 	var i;
+	var j;
 	var trouve;
 	var liste;
 	var fichier_sondage;
@@ -40,18 +41,29 @@ var create = function (req, res, query) {
 
 		liste = fs.readFileSync("./liste.json","utf-8");
 		liste = JSON.parse(liste);
-		i = 0;
+		j = 0;
 		trouve = false;
-		console.log(liste);
-		while(trouve === false && i < liste.length) {
-			console.log(liste[i]);
-			if(liste[i] === query.sondage) {
+		console.log(liste[j]);
+
+		while(trouve === false && j < liste.length) {
+			if(liste[j] === query.sondage) {
 				trouve = true;
-			}else i++;
+			}else j++;
 		}
-		console.log(trouve);
 
 	if(trouve === false) {
+		contenu_fichier = fs.readFileSync("./profils.json", "UTF-8");
+		contenu_fichier = JSON.parse(contenu_fichier);
+
+		i = 0;
+		trouve = false;
+		while (trouve === false && i < contenu_fichier.length) {
+			if(query.id === contenu_fichier[i].id) {
+				trouve = true;
+			}	
+			else i++;
+		};
+	
 		//On enregistre le sondage dans ceux de l'user
 		
 		contenu_fichier[i].sondageuser.push(query.sondage);

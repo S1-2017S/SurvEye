@@ -27,15 +27,15 @@ var del = require("./delete.js");
 var confirm_del = require("./req_confirm_delete.js");
 var req_static = require("./req_static.js");
 var req_erreur = require("./req_erreur.js");
-var req_tester_sondage = require("./req_tester_sondage.js");
 var req_ajouter_une_question = require("./req_ajouter_une_question.js");
 var req_confirmer_creation_sondage = require("./req_confirmer_creation_sondage.js");
-var req_terminer_test = require("./req_terminer_test.js");
 var req_retour_accueil_membre = require("./req_retour_accueil_membre.js");
 var req_valider_reponse = require("./req_valider_reponse.js");
 var valider = require("./valider.js");
 var req_valider_sondage = require("./req_valider_sondage.js");
 var req_deconnexion = require("./req_deconnexion.js");
+var req_historique = require("./req_historique.js");
+var supprimer = require("./supprimer.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -76,7 +76,7 @@ var traite_requete = function (req, res) {
 			case '/req_traiter_sondage' :
 				if (query.bouton === "Accueil") {
 					req_retour_accueil_membre(req, res, query);
-				}else if(query.bouton === "Acceder") {
+				}else if(query.bouton === "Voir") {
 					acceder(req, res, query);
 				}else if(query.bouton === "Fermer") {
 					fermer(req, res, query);
@@ -89,7 +89,14 @@ var traite_requete = function (req, res) {
 			case '/req_editer_sondage' :
 				if(query.p === "Valider") {
 					valider(req,res,query);
+				}else if (query.p === "Supprimer") {
+					supprimer(req, res, query);
+				}else if (query.p === "Valider sondage") {
+					req_valider_sondage(req, res, query);
 				}
+				break;
+			case '/req_historique' :
+				req_historique(req, res, query);
 				break;
 			case '/req_confirm_delete' :
 				confirm_del(req, res, query);
@@ -103,20 +110,11 @@ var traite_requete = function (req, res) {
 			case '/req_ajouter_une_question':
 				req_ajouter_une_question(req, res, query);
 				break;
-			case '/req_tester_sondage':
-				req_tester_sondage(req, res, query);
-				break;
 			case '/req_confirmer_creation_sondage':
 				req_confirmer_creation_sondage(req, res, query);
 				break;
-			case'/req_terminer_test':
-				req_terminer_test(req, res, query);
-				break;
 			case'/req_retour_accueil_membre':
 				req_retour_accueil_membre(req, res, query);
-				break;
-			case'/req_valider_sondage':
-				req_valider_sondage(req, res, query);
 				break;
 			case '/req_deconnexion':
 				req_deconnexion(req, res, query);
@@ -139,5 +137,5 @@ var traite_requete = function (req, res) {
 
 var mon_serveur = http.createServer(traite_requete);
 var port = 5000;
-console.log("Serveur en ecoute sur port " + port);
+console.log("En écoute sur " + port);
 mon_serveur.listen(port);

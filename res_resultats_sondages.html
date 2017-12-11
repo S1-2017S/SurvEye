@@ -6,13 +6,14 @@
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <h1>{sondage}</h1>
+		{message}
+        {results}
         <div id="myDiv"></div>
         <br>
         <p>
             <form action="req_consulter_sondages" method="GET">Retour à mes sondages <br>
                 <input type="hidden" name="id" value="{id}">
-                <input type="submit" name="bouton" value="mes_sondages">
+                <input type="submit" name="bouton" value="mes sondages">
             </form>
         </p>
         

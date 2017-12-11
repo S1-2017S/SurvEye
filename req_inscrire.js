@@ -30,6 +30,20 @@ var trait = function (req, res, query) {
 	listeMembres = JSON.parse(contenu_fichier);
 	profils = fs.readFileSync("profils.json",'utf-8');
 	listeProfils = JSON.parse(profils);
+	
+	marqueurs = {};
+
+	if(query.id === "") {
+		page = fs.readFileSync('modele_formulaire_inscription.html', 'utf-8');
+		marqueurs.erreur = "Le pseudo est vide !";	
+		marqueurs.id = query.id;
+		page = page.supplant(marqueurs);
+	} else if (query.password === "") {
+		page = fs.readFileSync('modele_formulaire_inscription.html', 'utf-8');
+		marqueurs.erreur = "le mot de passe est vide !";
+		marqueurs.id = query.id;
+		page = page.supplant(marqueurs);
+	} else {
 
 	trouve = false;
 	i = 0;
@@ -43,7 +57,7 @@ var trait = function (req, res, query) {
 
 	registered = false;
 	if(trouve === false) {											//SI PAS DE COMPTE CREATION COMPTE ET PROFIL
-
+		
 		if (query.password === query.confirm) {
 			nouveauMembre = {};
 			nouveauProfil = {};
@@ -73,17 +87,16 @@ var trait = function (req, res, query) {
 			marqueurs.erreur = "ERREUR : confirmation invalide !";
 			marqueurs.id = query.id;
 			page = page.supplant(marqueurs);
-		}
-
+		} 
+		
 	} else if (trouve === true) {									//COMPTE DEJA EXISTANT
-
+		
 			page = fs.readFileSync('modele_formulaire_inscription.html', 'utf-8');
 
 			marqueurs = {};
-			marqueurs.erreur = "ERREUR : ce compte existe déjà";
 			marqueurs.id = query.id;
+			marqueurs.erreur = "ERREUR : ce compte existe déjà";
 			page = page.supplant(marqueurs);
-
 	} 
 
 	if (registered === true) {
@@ -95,7 +108,7 @@ var trait = function (req, res, query) {
 		marqueurs.password = query.password;
 		page = page.supplant(marqueurs);
 	}
-
+}
 
 	
 
