@@ -29,6 +29,7 @@ var histo = function(req,res,query) {
 	marqueurs.id = query.id;
 	question = query.q;
 	reponses = [];
+	marqueurs.indice = Number(query.numero)+1;
 	marqueurs.erreurQ = "";
 	marqueurs.erreurR = "";
 	compteur = 0;
