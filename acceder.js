@@ -71,6 +71,7 @@ var trait = function(req,res,query) {
         marqueurs = {};
         marqueurs.id = query.id;
         marqueurs.sondage = query.sondage;
+		marqueurs.message = "Le sondage est fermé, vous pouvez donc accèder seulement au résultat.";
         nb_reponses = 0;
 	marqueurs.results = "";
         for(i = 0; i < contenu_fichier.answers.length; i++) {
