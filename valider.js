@@ -79,10 +79,6 @@ var histo = function(req,res,query) {
 		marqueurs[String(i)] = "";
 	}
 
-	page = page.supplant(marqueurs);
-	res.writeHead(200, {'Content-Type': 'text/html'});
-	res.write(page);
-	res.end();
 
 }
 module.exports = histo;

@@ -36,6 +36,7 @@ var req_valider_sondage = require("./req_valider_sondage.js");
 var req_deconnexion = require("./req_deconnexion.js");
 var req_historique = require("./req_historique.js");
 var supprimer = require("./supprimer.js");
+var req_editer_sondage = require("./req_editer_sondage.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
