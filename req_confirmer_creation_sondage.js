@@ -58,7 +58,6 @@ var create = function (req, res, query) {
 
 	erreur = false
 	for(k = 0; k < query.sondage.length; k++) {
-		console.log(query.sondage[k])
 		if(query.sondage[k] === " ") {
 			erreur = true;
 		}

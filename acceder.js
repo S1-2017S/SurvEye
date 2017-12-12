@@ -38,7 +38,8 @@ var trait = function(req,res,query) {
             page = fs.readFileSync("./res_resultats_sondages.html", "utf-8");
             marqueurs = {};
             marqueurs.id = query.id;
-            marqueurs.sondage = "";
+ 			marqueurs.message = "";
+ 			marqueurs.sondage = "";
             nb_reponses = 0;
             for(i = 0; i < contenu_fichier.answers.length; i++) {
                 marqueurs.results += "<h2>"+contenu_fichier.questions[i]+"</h2><br>";
@@ -58,6 +59,7 @@ var trait = function(req,res,query) {
             marqueurs = {};
             marqueurs.id = query.id;
             marqueurs.questions = "";
+ 			marqueurs.message = "";
             marqueurs.sondage = query.sondage;
             for(i = 0; i < contenu_fichier.questions.length; i++) {
                 marqueurs.questions += "<h2>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</h2><br>"
@@ -84,7 +86,7 @@ var trait = function(req,res,query) {
 			i++
 		}
         nb_reponses = 0;
-	marqueurs.results = "";
+		marqueurs.results = "";
         for(i = 0; i < contenu_fichier.answers.length; i++) {
             marqueurs.results += "<h2>"+contenu_fichier.questions[i]+"</h2><br>";
             for(x = 1; x < contenu_fichier.answers[i].length; x++) {
