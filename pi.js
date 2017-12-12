@@ -14,29 +14,29 @@ var querystring = require("querystring");
 // DECLARATION DES DIFFERENTS MODULES CORRESPONDANT A CHAQUE ACTION
 //-------------------------------------------------------------------------
 
-var req_commencer = require("./req_commencer.js");
-var req_afficher_formulaire_inscription = require("./req_afficher_formulaire_inscription.js");
-var req_inscrire = require("./req_inscrire.js");
-var req_identifier = require("./req_identifier.js");
-var req_consulter_sondages = require("./req_consulter_sondages.js");
-var acceder = require("./acceder.js");
-var req_creer_un_sondage = require("./req_creer_un_sondage.js");
-var fermer = require("./fermer.js");
-var ouvrir = require("./ouvrir.js");
-var del = require("./delete.js");
-var confirm_del = require("./req_confirm_delete.js");
-var req_static = require("./req_static.js");
-var req_erreur = require("./req_erreur.js");
-var req_ajouter_une_question = require("./req_ajouter_une_question.js");
-var req_confirmer_creation_sondage = require("./req_confirmer_creation_sondage.js");
-var req_retour_accueil_membre = require("./req_retour_accueil_membre.js");
-var req_valider_reponse = require("./req_valider_reponse.js");
-var valider = require("./valider.js");
-var req_valider_sondage = require("./req_valider_sondage.js");
-var req_deconnexion = require("./req_deconnexion.js");
-var req_historique = require("./req_historique.js");
-var supprimer = require("./supprimer.js");
-var req_editer_sondage = require("./req_editer_sondage.js");
+var req_commencer = require("./req/req_commencer.js");
+var req_afficher_formulaire_inscription = require("./req/req_afficher_formulaire_inscription.js");
+var req_inscrire = require("./req/req_inscrire.js");
+var req_identifier = require("./req/req_identifier.js");
+var req_consulter_sondages = require("./req/req_consulter_sondages.js");
+var acceder = require("./req/acceder.js");
+var req_creer_un_sondage = require("./req/req_creer_un_sondage.js");
+var fermer = require("./req/fermer.js");
+var ouvrir = require("./req/ouvrir.js");
+var del = require("./req/delete.js");
+var confirm_del = require("./req/req_confirm_delete.js");
+var req_static = require("./req/req_static.js");
+var req_erreur = require("./req/req_erreur.js");
+var req_ajouter_une_question = require("./req/req_ajouter_une_question.js");
+var req_confirmer_creation_sondage = require("./req/req_confirmer_creation_sondage.js");
+var req_retour_accueil_membre = require("./req/req_retour_accueil_membre.js");
+var req_valider_reponse = require("./req/req_valider_reponse.js");
+var valider = require("./req/valider.js");
+var req_valider_sondage = require("./req/req_valider_sondage.js");
+var req_deconnexion = require("./req/req_deconnexion.js");
+var req_historique = require("./req/req_historique.js");
+var supprimer = require("./req/supprimer.js");
+var req_editer_sondage = require("./req/req_editer_sondage.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
