@@ -38,8 +38,9 @@ var trait = function(req,res,query) {
             page = fs.readFileSync("./res/res_resultats_sondages.html", "utf-8");
             marqueurs = {};
             marqueurs.id = query.id;
- 			marqueurs.message = "";
+ 			marqueurs.message = "Vous avez déjà répondu à ce sondage.";
  			marqueurs.sondage = "";
+			marqueurs.results = "";
             nb_reponses = 0;
             for(i = 0; i < contenu_fichier.answers.length; i++) {
                 marqueurs.results += "<h2>"+contenu_fichier.questions[i]+"</h2><br>";
@@ -73,18 +74,7 @@ var trait = function(req,res,query) {
         marqueurs = {};
         marqueurs.id = query.id;
         marqueurs.sondage = query.sondage;
-		
-		i = 0;
-		trouve = false
-		while(trouve === false && i < contenu_fichier.ids.length) {
-			if(query.id == contenu_fichier.ids[i]) {
-				marqueurs.message = "";
-				trouve = true;
-			} else {
-				marqueurs.message = "Le sondage est fermé, vous pouvez donc accèder seulement au résultat.";
-			}
-			i++
-		}
+		marqueurs.message = "Ce sondage est fermé.";
         nb_reponses = 0;
 		marqueurs.results = "";
         for(i = 0; i < contenu_fichier.answers.length; i++) {
