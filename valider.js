@@ -65,20 +65,22 @@ var histo = function(req,res,query) {
 		}
 		contenu_fichier.answers[query.numero] = answers;
 		marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
-
-		for(i = 0; i < contenu_fichier.questions.length; i++) {
-			marqueurs.histo += '<a href ="req_historique?question='+i+'&id='+query.id+'">'+"Question "+(i+1)+" : "+(contenu_fichier.questions[i])+'</a> <br>';
-		}
-
-		contenu_fichier = JSON.stringify(contenu_fichier);
-		fs.writeFileSync("./"+query.id+"t.json", contenu_fichier, "utf-8");
 	}
-
+	marqueurs.suppress = "";
 	marqueurs.q = "";
 	for(i = 0; i < 10; i++) {
 		marqueurs[String(i)] = "";
 	}
+	for(i = 0; i < contenu_fichier.questions.length; i++) {
+		marqueurs.histo += "<a href='/req_historique?question="+i+"&id="+query.id+"'>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</a><br>";
+	}
+	
+	contenu_fichier = JSON.stringify(contenu_fichier);
+	fs.writeFileSync("./"+query.id+"t.json", contenu_fichier, "utf-8");
 
-
+	page = page.supplant(marqueurs);
+	res.writeHead(200, {'Content-Type': 'text/html'});
+	res.write(page);
+	res.end();
 }
 module.exports = histo;

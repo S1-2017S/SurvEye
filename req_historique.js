@@ -26,6 +26,8 @@ var trait = function(req,res,query) {
 	marqueurs.id = query.id;
 	marqueurs.q = contenu_fichier.questions[query.question];
 	marqueurs.indice = query.question;
+
+	//on rempli les champs
 	i = 0;
 	do {
 		if(contenu_fichier.reponses[query.question][i] !== "") {
@@ -41,6 +43,7 @@ var trait = function(req,res,query) {
 	for(i = 0; i < contenu_fichier.questions.length; i++) {
 		marqueurs.histo += "<a href='/req_historique?question="+i+"&id="+query.id+"'>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</a><br>";
 	}
+	marqueurs.suppress = "<input type='submit' name='p' value='Supprimer'>";
 	page = page.supplant(marqueurs);
 	
 	res.writeHead(200, {"Content-Type" : "text/html"});
