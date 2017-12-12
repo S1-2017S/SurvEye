@@ -28,6 +28,7 @@ Fermeture du sondage
 
 	marqueurs = {};
 	marqueurs.confirm = "Votre sondage "+query.sondage+" a bien été fermé";
+	marqueurs.redirect = '<meta http-equiv="refresh" content="4; req_consulter_sondages?action=consulter&id='+query.id+'"/>';
 	marqueurs.id = query.id;
 	marqueurs.direction = "'Mes sondages'";
 
