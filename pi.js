@@ -37,6 +37,8 @@ var req_deconnexion = require("./req/req_deconnexion.js");
 var req_historique = require("./req/req_historique.js");
 var supprimer = require("./req/supprimer.js");
 var req_editer_sondage = require("./req/req_editer_sondage.js");
+var req_preferences = require("./req/req_preferences.js");
+var req_nouveau_mdp = require("./req/req_nouveau_mdp.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -119,6 +121,12 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_deconnexion':
 				req_deconnexion(req, res, query);
+				break;
+			case '/req_preferences':
+				req_preferences(req, res, query);
+				break;
+			case '/req_nouveau_mdp':
+				req_nouveau_mdp(req, res, query);
 				break;
 			default:
 				req_static(req, res, query);
