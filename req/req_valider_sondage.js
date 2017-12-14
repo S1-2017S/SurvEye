@@ -41,20 +41,7 @@ var valider = function (req, res, query) {
 			compteur++
 		}
 	}
-	if (query.numero === "0") {
-		
-		if(query.q === "") {
-			page = fs.readFileSync("res/res_creation_sondage.html", "UTF-8");
-			marqueurs.erreurQ = "Vous devez mettre une question";
-			marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
-			marqueurs.erreurR = "";
-			marqueurs.q = "";
-			marqueurs.suppress = "";
-			marqueurs.histo = "";
-			marqueurs.indice = 0
-			query.numero = Number(query.numero);
-			
-		} else if(compteur < 2) {
+	if(compteur < 2) {
 			page = fs.readFileSync("res/res_creation_sondage.html", "UTF-8");
 			marqueurs.erreurR = "Vous devez mettre au minimum 2 réponses";
 			marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
@@ -64,8 +51,6 @@ var valider = function (req, res, query) {
 			marqueurs.histo = "";
 			marqueurs.indice = 0
 			query.numero = Number(query.numero);
-			
-		}
 
 	} else {
     	page = fs.readFileSync('res/res_valider_sondage.html', 'UTF-8');

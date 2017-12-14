@@ -15,9 +15,10 @@ var del = function (req,res,query) {
 	page = fs.readFileSync("./res/res_confirm_delete_sondage.html","utf-8");
 
 	marqueurs = {};
-	marqueurs.sondage = query.sondage;
 	marqueurs.id = query.id;
-	
+	marqueurs.delete = " le sondage "+query.sondage
+	marqueurs.sondage = query.sondage
+
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {'Content-Type': 'text/html'});

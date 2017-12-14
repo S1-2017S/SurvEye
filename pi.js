@@ -39,6 +39,7 @@ var supprimer = require("./req/supprimer.js");
 var req_editer_sondage = require("./req/req_editer_sondage.js");
 var req_preferences = require("./req/req_preferences.js");
 var req_nouveau_mdp = require("./req/req_nouveau_mdp.js");
+var req_suppression_compte = require("./req/req_suppression_compte.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -127,6 +128,9 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_nouveau_mdp':
 				req_nouveau_mdp(req, res, query);
+				break;
+			case '/req_suppression_compte':
+				req_suppression_compte(req, res, query);
 				break;
 			default:
 				req_static(req, res, query);
