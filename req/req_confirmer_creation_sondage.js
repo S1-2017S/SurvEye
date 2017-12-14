@@ -62,7 +62,7 @@ var create = function (req, res, query) {
 			erreur = true;
 		}
 	}
-
+	
 	if(erreur === true) {
 	
 	//On construit la page d'erreur
@@ -71,6 +71,12 @@ var create = function (req, res, query) {
 		marqueurs = {};
 		marqueurs.id = query.id;
 		marqueurs.erreur = "Erreur : les espaces ne sont pas autorisés dans le nom du sondage.";
+	
+	}else  if (query.sondage === "") {
+		page = fs.readFileSync("./res/res_valider_sondage.html","utf-8");
+		marqueurs = {};
+		marqueurs.id = query.id;
+		marqueurs.erreur = "Erreur : le nom du sondage est vide.";
 	
 	}else if(trouve === true) {
 		

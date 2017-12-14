@@ -19,8 +19,6 @@ var valider = function (req, res, query) {
 	var reponses;
 	var question;
 
-    page = fs.readFileSync('res/res_valider_sondage.html', 'UTF-8');
-
 	contenu_fichier = fs.readFileSync("./json/"+query.id+"t.json", "UTF-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
     
@@ -30,15 +28,47 @@ var valider = function (req, res, query) {
 	question = query.q;
 	marqueurs.erreur = "";
 
+	
+	for(i = 0; i < 15; i++) {
+		marqueurs[String(i)] = "";
+	}
+	
+	i = 0;
 	compteur = 0;
 	for(i = 0; i < 10; i ++) {
 		if(query[String(i)] !== "") {
 			reponses.push(query[String(i)]);
 			compteur++
 		}
-	}	
+	}
+	if (query.numero === "0") {
+		
+		if(query.q === "") {
+			page = fs.readFileSync("res/res_creation_sondage.html", "UTF-8");
+			marqueurs.erreurQ = "Vous devez mettre une question";
+			marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
+			marqueurs.erreurR = "";
+			marqueurs.q = "";
+			marqueurs.suppress = "";
+			marqueurs.histo = "";
+			marqueurs.indice = 0
+			query.numero = Number(query.numero);
+			
+		} else if(compteur < 2) {
+			page = fs.readFileSync("res/res_creation_sondage.html", "UTF-8");
+			marqueurs.erreurR = "Vous devez mettre au minimum 2 réponses";
+			marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
+			marqueurs.erreurQ = "";
+			marqueurs.q = "";
+			marqueurs.suppress = "";
+			marqueurs.histo = "";
+			marqueurs.indice = 0
+			query.numero = Number(query.numero);
+			
+		}
 
-	if(compteur > 1) {
+	} else {
+    	page = fs.readFileSync('res/res_valider_sondage.html', 'UTF-8');
 		contenu_fichier.questions.push(question);
 		contenu_fichier.reponses.push(reponses);
 		contenu_fichier.answers.push([]);
