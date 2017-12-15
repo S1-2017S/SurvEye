@@ -29,7 +29,6 @@ var histo = function(req,res,query) {
 	marqueurs.id = query.id;
 	question = query.q;
 	reponses = [];
-	marqueurs.indice = Number(query.numero)+1;
 	marqueurs.erreurQ = "";
 	marqueurs.erreurR = "";
 	compteur = 0;
@@ -43,12 +42,15 @@ var histo = function(req,res,query) {
 	}
 
 	if(query.q === "") {
-		marqueurs.erreurQ = "Vous devez mettre une question";
+		marqueurs.erreurQ = "La question est vide !";
 		marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
+		marqueurs.indice = Number(query.numero)
 	} else if(compteur < 2) {
 		marqueurs.erreurR = "Vous devez mettre au minimum 2 réponses";
 		marqueurs.question = "Question "+(contenu_fichier.questions.length+1);
+		marqueurs.indice = Number(query.numero)
 	} else {
+		marqueurs.indice = Number(query.numero)+1;
 		if(contenu_fichier.questions[query.numero] !== "") {
 			contenu_fichier.questions[query.numero] = question;
 			contenu_fichier.reponses[query.numero] = reponses;
