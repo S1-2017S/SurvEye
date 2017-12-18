@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html> 
-
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <script src="./req/application.js"></script>
+        <link rel="stylesheet" type="text/css" href="./res/application.css">
+    </head>
 
     <body>
+        <header>
+                <nav>
+                    <button id="opener">Historique</button>  
+                </nav>
+            </header>
+        <div id="mySidepannel" class="sidepannel">
+            <button id="closer">X</button>
+            {histo}
+        </div>
+
         <center><h2>Créez votre sondage !</h2></center>
-        {histo}
         <h3>{question}</h3>
         
         <form action="/req_editer_sondage" method="GET">
