@@ -10,6 +10,9 @@ var trait = function() {
 	var x = document.getElementById("opener");
 	x.addEventListener("click", openNav);
 	document.getElementById("closer").addEventListener("click", closeNav);
+	document.getElementsByName("retour").addEventListener("click", function() {
+		confirm("Voulez-vous abandonner ?");
+	});
 }
 
 window.addEventListener("load", trait);
