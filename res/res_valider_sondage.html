@@ -12,8 +12,12 @@
             <input type="hidden" name="id" value="{id}">
             {erreur}
         </form>
+
+        <form action="req_inviter">
+            <input type="submit" value="Inviter">
+        </form>
 		<form action="req_retour_creation_sondage" method="GET">
-			<input type="submit" name="sondage" value="Retour">
+			<input type="submit" name="return" value="Retour">
 			<input type="hidden" name="id" value="{id}">
 		</form>
     </body>
