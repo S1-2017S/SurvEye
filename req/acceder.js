@@ -22,7 +22,14 @@ var trait = function(req,res,query) {
     contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
 
-    if(contenu_fichier.etat === "open") {
+	if(query.id === "{id}") {
+	    page = fs.readFileSync('res/modele_accueil.html', 'utf-8');
+
+		marqueurs = {};
+		marqueurs.erreur = "";
+		marqueurs.id = "";
+
+	}else if(contenu_fichier.etat === "open") {
 
         i = 0;
         trouve = false;
@@ -90,9 +97,9 @@ var trait = function(req,res,query) {
         }
     }
 	page = page.supplant(marqueurs);
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(page);
-        res.end();
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(page);
+    res.end();
 
 }
 module.exports = trait;
