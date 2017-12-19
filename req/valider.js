@@ -80,7 +80,7 @@ var histo = function(req,res,query) {
 	contenu_fichier = JSON.stringify(contenu_fichier);
 	fs.writeFileSync("./json/"+query.id+"t.json", contenu_fichier, "utf-8");
 
-	marqueurs.script = '<button id="opener">Historique</button> ';
+	marqueurs.script = '<button class="btn navbar-btn" id="opener">Historique</button> ';
 	page = page.supplant(marqueurs);
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write(page);

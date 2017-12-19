@@ -25,7 +25,8 @@ var trait = function(req,res,query) {
 	marqueurs.id = query.id;
 	marqueurs.erreurQ = "";
 	marqueurs.erreurR = "";
-	marqueurs.question = "Question "+[Number(query.numero)+1];
+	console.log(contenu_fichier.questions.length);
+	marqueurs.question = "Question "+Number(contenu_fichier.questions.length+1);
 
 	//on rempli les champs
 	if(contenu_fichier.questions[contenu_fichier.questions.length] === undefined) {
