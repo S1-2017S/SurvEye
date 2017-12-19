@@ -58,7 +58,7 @@ var trait = function(req,res,query) {
 	if(marqueurs.histo === "") {
 		marqueurs.script = "";
 	}else {
-		marqueurs.script = '<button id="opener">Historique</button> ';
+		marqueurs.script = '<button class="btn navbar-btn" id="opener">Historique</button> ';
 	}
 	page = page.supplant(marqueurs)
 	res.writeHead(200, {'Content-Type': 'text/html'});

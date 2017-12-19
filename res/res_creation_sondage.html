@@ -4,47 +4,69 @@
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
         <script src="./req/application.js"></script>
         <link rel="stylesheet" type="text/css" href="./res/application.css">
+        <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
     </head>
 
     <body>
-        <header>
-                <nav>
+        <div class="container col-md-5">
+            <div class="row"><img class ="img-responsive" src="./Logo_1.png" ></div>
+            <nav class="navbar navbar-fixed-top">
+                <div class="container-fluid">
                     {script} 
-                </nav>
-            </header>
-        <div id="mySidepannel" class="sidepannel">
-            <button id="closer">X</button>
-            {histo}
+
+                </div>
+            </nav>
+            <div class="row">
+                <h1>Créez votre sondage !</h1>
+            </div>
+            <div id="mySidepannel" class="sidepannel">
+                <button id="closer">X</button>
+                {histo}
+            </div>
+
+            <div class="row">
+                <div class="col-md-2 col-md-3">
+                    <h3>{question}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <form action="/req_editer_sondage" method="GET">
+                    <input type="hidden" name="id" value="{id}">
+                    <input type="hidden" name="numero" value="{indice}">
+                    <input type="text" value="{q}" name="q">{erreurQ}
+                    <br><br><p>
+                    <input type="text" value="{0}" name="0">{erreurR}<br>
+                    <input type="text" value="{1}" name="1"><br>
+                    <input type="text" value="{2}" name="2"><br>
+                    <input type="text" value="{3}" name="3"><br>
+                    <input type="text" value="{4}" name="4"><br>
+                    <input type="text" value="{5}" name="5"><br>
+                    <input type="text" value="{6}" name="6"><br>
+                    <input type="text" value="{7}" name="7"><br>
+                    <input type="text" value="{8}" name="8"><br>
+                    <input type="text" value="{9}" name="9"><br><p>
+                    <input class="btn btn-outline-primary" type="submit" name="p" value="Valider">
+                    {suppress}
+                    </p>
+            </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input class="btn btn-outline-success" type="submit" name="p" value="Valider sondage">
+                        </div>
+                    
+                    </div>
+                </form>
+
+                <form action="req_retour_accueil_membre" method="GET">
+                    <div class="col-md-1 col-md-2">
+                        <input type="submit" class="btn btn-outline-danger" name="retour" value="Abandon">
+                    </div>
+                    <input type="hidden" name="id" value="{id}">
+                </form>
+            </div>
         </div>
-
-        <center><h2>Créez votre sondage !</h2></center>
-        <h3>{question}</h3>
-        
-        <form action="/req_editer_sondage" method="GET">
-            <input type="hidden" name="id" value="{id}">
-            <input type="hidden" name="numero" value="{indice}">
-            <input type="text" value="{q}" name="q">{erreurQ}
-            <br><p>
-            <input type="text" value="{0}" name="0">{erreurR}<br>
-            <input type="text" value="{1}" name="1"><br>
-            <input type="text" value="{2}" name="2"><br>
-            <input type="text" value="{3}" name="3"><br>
-            <input type="text" value="{4}" name="4"><br>
-            <input type="text" value="{5}" name="5"><br>
-            <input type="text" value="{6}" name="6"><br>
-            <input type="text" value="{7}" name="7"><br>
-            <input type="text" value="{8}" name="8"><br>
-            <input type="text" value="{9}" name="9"><br><p>
-            <input type="submit" name="p" value="Valider">
-			{suppress}
-        </p>
-            <input type="submit" name="p" value="Valider sondage">
-        </form>
-
-        <form action="req_retour_accueil_membre" method="GET">
-            <input type="submit" name="retour" value="Abandon">
-            <input type="hidden" name="id" value="{id}">
-        </form>
 	</body>
 
 </html>
