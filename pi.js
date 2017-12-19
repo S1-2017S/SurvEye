@@ -90,8 +90,6 @@ var traite_requete = function (req, res) {
 					ouvrir(req, res, query);
 				}else if(query.bouton === "Supprimer") {
 					del(req, res, query);
-				}else if(query.bouton === "URL") {
-					voir_url(req, res, query);
 				}
 				break;
 			case '/req_editer_sondage' :
@@ -101,6 +99,8 @@ var traite_requete = function (req, res) {
 					supprimer(req, res, query);
 				}else if (query.p === "Valider sondage") {
 					req_valider_sondage(req, res, query);
+				}else if(query.confirmer === "Confirmer") {
+					req_confirmer_creation_sondage(req, res, query);
 				}
 				break;
 			case '/req_inviter' :
@@ -120,9 +120,6 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_ajouter_une_question':
 				req_ajouter_une_question(req, res, query);
-				break;
-			case '/req_confirmer_creation_sondage':
-				req_confirmer_creation_sondage(req, res, query);
 				break;
 			case'/req_retour_accueil_membre':
 				req_retour_accueil_membre(req, res, query);
