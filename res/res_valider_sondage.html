@@ -6,13 +6,12 @@
     <p>Entrez le nom de votre sondage
     </p>
     <body>
-        <form action="req_confirmer_creation_sondage" method="GET">
+        <form action="req_editer_sondage" method="GET">
             <input type="textarea" name="sondage" value="">
             <input type="submit" name="confirmer" value="Confirmer">
             <input type="hidden" name="id" value="{id}">
             {erreur}
         </form>
-
         <form action="req_inviter">
             <input type="submit" value="Inviter">
         </form>

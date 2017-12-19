@@ -41,6 +41,7 @@ var req_preferences = require("./req/req_preferences.js");
 var req_nouveau_mdp = require("./req/req_nouveau_mdp.js");
 var req_retour_creation_sondage = require("./req/req_retour_creation_sondage.js");
 var req_inviter = require("./req/req_inviter.js");
+var voir_url = require("./req/req_url.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -98,6 +99,8 @@ var traite_requete = function (req, res) {
 					supprimer(req, res, query);
 				}else if (query.p === "Valider sondage") {
 					req_valider_sondage(req, res, query);
+				}else if(query.confirmer === "Confirmer") {
+					req_confirmer_creation_sondage(req, res, query);
 				}
 				break;
 			case '/req_inviter' :
@@ -117,9 +120,6 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_ajouter_une_question':
 				req_ajouter_une_question(req, res, query);
-				break;
-			case '/req_confirmer_creation_sondage':
-				req_confirmer_creation_sondage(req, res, query);
 				break;
 			case'/req_retour_accueil_membre':
 				req_retour_accueil_membre(req, res, query);

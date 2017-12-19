@@ -28,7 +28,6 @@ var valider = function (req, res, query) {
 	marqueurs.id = query.id;
 	question = query.q;
 	marqueurs.erreur = "";
-
 	
 	for(i = 0; i < 15; i++) {
 		marqueurs[String(i)] = "";

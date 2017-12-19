@@ -45,6 +45,7 @@ var trait = function(req,res,query) {
 		marqueurs.histo += "<a href='/req_historique?question="+i+"&id="+query.id+"'>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</a><br>";
 	}
 	marqueurs.suppress = "<input type='submit' name='p' value='Supprimer'>";
+	marqueurs.script = '<button id="opener">Historique</button> ';
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {"Content-Type" : "text/html"});
