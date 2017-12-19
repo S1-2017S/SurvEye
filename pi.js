@@ -40,7 +40,6 @@ var req_editer_sondage = require("./req/req_editer_sondage.js");
 var req_preferences = require("./req/req_preferences.js");
 var req_nouveau_mdp = require("./req/req_nouveau_mdp.js");
 var req_retour_creation_sondage = require("./req/req_retour_creation_sondage.js");
-var req_inviter = require("./req/req_inviter.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -99,9 +98,6 @@ var traite_requete = function (req, res) {
 				}else if (query.p === "Valider sondage") {
 					req_valider_sondage(req, res, query);
 				}
-				break;
-			case '/req_inviter' :
-				req_inviter(req,res,query);
 				break;
 			case '/req_historique' :
 				req_historique(req, res, query);

@@ -46,7 +46,6 @@ var create = function (req, res, query) {
 		liste = JSON.parse(liste);
 		j = 0;
 		trouve = false;
-		console.log(liste[j]);
 
 		while(trouve === false && j < liste.length) {
 			if(liste[j] === query.sondage) {

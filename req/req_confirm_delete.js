@@ -86,7 +86,7 @@ Suppression du sondage
 
 	marqueurs.sondage = query.sondage;
 	marqueurs.id = query.id;
-	marqueurs.redirect = '<meta http-equiv="refresh" content="4; req_consulter_sondages?action=consulter&id='+query.id+'"/>';
+	marqueurs.redirect = '<meta http-equiv="refresh" content="3; req_consulter_sondages?action=consulter&id='+query.id+'"/>';
 	marqueurs.direction = '"mes sondages"';
 	page = page.supplant(marqueurs);
 

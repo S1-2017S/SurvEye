@@ -19,6 +19,10 @@ var valider = function (req, res, query) {
 	var reponses;
 	var question;
 	var error;
+	var liste_membres;
+
+	liste_membres = fs.readFileSync("./json/membres.json","utf-8");
+	liste_membres = JSON.parse(liste_membres);
 
 	contenu_fichier = fs.readFileSync("./json/"+query.id+"t.json", "UTF-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
@@ -28,7 +32,7 @@ var valider = function (req, res, query) {
 	marqueurs.id = query.id;
 	question = query.q;
 	marqueurs.erreur = "";
-
+	marqueurs.inviter = "";
 	
 	for(i = 0; i < 15; i++) {
 		marqueurs[String(i)] = "";
@@ -84,6 +88,14 @@ var valider = function (req, res, query) {
 		}
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./json/"+query.id+"t.json", contenu_fichier, "utf-8");
+	}
+
+	marqueurs.inviter = "<p><h1> Voulez-vous inviter des membres du site à répondre à votre sondage ?</h1></p><br>"
+
+	for (i = 0; i < liste_membres.length; i++) {
+		if (liste_membres[i].id !== query.id) {
+			marqueurs.inviter += '<input type="checkbox" name="invitation" value="'+liste_membres[i]+'">'+liste_membres[i].id+'<br>';
+		}		
 	}
 
 	page = page.supplant(marqueurs);
