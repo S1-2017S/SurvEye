@@ -28,11 +28,15 @@ var trait = function(req,res,query) {
 	marqueurs.question = "Question "+[Number(query.numero)+1];
 
 	//on rempli les champs
-	console.log(contenu_fichier.questions.length);
-	marqueurs.q = contenu_fichier.questions[contenu_fichier.questions.length];
+	if(contenu_fichier.questions[contenu_fichier.questions.length] === undefined) {
+		marqueurs.q = "";
+	}else {
+		marqueurs.q = contenu_fichier.questions[contenu_fichier.questions.length];
+	}
+
 	i = 0;
 	do {
-		if(contenu_fichier.reponses.length[i] !== "") {
+		if(contenu_fichier.reponses.length[i] !== "" && contenu_fichier.reponses.length[i] !== undefined) {
 			marqueurs[String(i)] = contenu_fichier.reponses.length[i];
 			i++;
 		}
@@ -51,6 +55,11 @@ var trait = function(req,res,query) {
 	contenu_fichier = JSON.stringify(contenu_fichier);
 	fs.writeFileSync("./json/"+query.id+"t.json", contenu_fichier, "utf-8");
 	
+	if(marqueurs.histo === "") {
+		marqueurs.script = "";
+	}else {
+		marqueurs.script = '<button id="opener">Historique</button> ';
+	}
 	page = page.supplant(marqueurs)
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write(page);
