@@ -90,6 +90,8 @@ var traite_requete = function (req, res) {
 					ouvrir(req, res, query);
 				}else if(query.bouton === "Supprimer") {
 					del(req, res, query);
+				}else if(query.bouton === "URL") {
+					voir_url(req, res, query);
 				}
 				break;
 			case '/req_editer_sondage' :
