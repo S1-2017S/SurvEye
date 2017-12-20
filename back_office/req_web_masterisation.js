@@ -13,10 +13,10 @@ var web_masterisation = function (req, res, query) {
     var contenu_fichier;
     var i;
 
-    page = fs.readFileSync("./res_sondages_web_master.html", "utf-8");
+    page = fs.readFileSync("./back_office/res_sondages_web_master.html", "utf-8");
     marqueurs = {};
 
-    contenu_fichier = fs.readFileSync("./liste.json", "utf-8");
+    contenu_fichier = fs.readFileSync("./json/liste.json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
 
     for (i = 0; i < contenu_fichier.length; i++) {
