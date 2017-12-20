@@ -19,11 +19,15 @@ var create = function (req, res, query) {
 	var liste;
 	var fichier_sondage;
 	var erreur;
+	var liste_membres;
 
 	/*
 	Vérification si l'id du user et du nom du sondage existent dans profils.json
 	*/
 	
+	liste_membres = fs.readFileSync("./json/membres.json","utf-8");
+	liste_membres = JSON.parse(liste_membres);
+
 	contenu_fichier = fs.readFileSync("./json/profils.json", "UTF-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 
@@ -57,7 +61,7 @@ var create = function (req, res, query) {
 
 	erreur = false
 	for(k = 0; k < query.sondage.length; k++) {
-		if(query.sondage[k] === " ") {
+		if(query.sondage[k] === "") {
 			erreur = true;
 		}
 	}
@@ -119,6 +123,16 @@ var create = function (req, res, query) {
 		fichier_sondage = JSON.stringify(fichier_sondage);		
 		fs.writeFileSync("./json/"+query.sondage+".json", fichier_sondage, "utf-8");
 		
+		//invitation des membres demandés par l'utilisateur
+
+		for (i = 0; i < query.invitation.length; i++) {
+			for (j = 0; j < contenu_fichier.length; j++) {
+				if (query.invitation[i] === contenu_fichier[j].id) {
+					contenu_fichier[j].sondageguest.push(query.sondage);
+				}				
+			}		
+		}
+
 		//On construit la page de confirmation
 
 		page = fs.readFileSync("./res/res_confirmation_creation.html","utf-8");
@@ -127,7 +141,7 @@ var create = function (req, res, query) {
 		marqueurs.confirm = "crée";
 		marqueurs.direction = "accueil membre";
 		marqueurs.sondage = query.sondage;
-		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir"
+		marqueurs.url = '<a href="http://localhost:5000/req_traiter_sondage?&sondage='+query.sondage+'&bouton=Voir"></a>';
 
 	}
 

@@ -94,7 +94,7 @@ var valider = function (req, res, query) {
 
 	for (i = 0; i < liste_membres.length; i++) {
 		if (liste_membres[i].id !== query.id) {
-			marqueurs.inviter += '<input type="checkbox" name="invitation" value="'+liste_membres[i]+'">'+liste_membres[i].id+'<br>';
+			marqueurs.inviter += '<input type="checkbox" name="invitation" value="'+liste_membres[i].id+'">'+liste_membres[i].id+'<br>';
 		}		
 	}
 

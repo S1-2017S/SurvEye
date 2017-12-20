@@ -99,9 +99,10 @@ var traite_requete = function (req, res) {
 					supprimer(req, res, query);
 				}else if (query.p === "Valider sondage") {
 					req_valider_sondage(req, res, query);
-				}else if(query.confirmer === "Confirmer") {
-					req_confirmer_creation_sondage(req, res, query);
 				}
+				break;
+			case '/req_confirmer_creation_sondage' :
+				req_confirmer_creation_sondage(req, res, query);
 				break;
 			case '/req_historique' :
 				req_historique(req, res, query);
