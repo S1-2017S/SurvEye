@@ -124,7 +124,7 @@ var create = function (req, res, query) {
 		fs.writeFileSync("./json/"+query.sondage+".json", fichier_sondage, "utf-8");
 		
 		//invitation des membres demandés par l'utilisateur
-
+		/*
 		for (i = 0; i < query.invitation.length; i++) {
 			for (j = 0; j < contenu_fichier.length; j++) {
 				if (query.invitation[i] === contenu_fichier[j].id) {
@@ -132,7 +132,7 @@ var create = function (req, res, query) {
 				}				
 			}		
 		}
-
+		*/
 		//On construit la page de confirmation
 
 		page = fs.readFileSync("./res/res_confirmation_creation.html","utf-8");
