@@ -61,7 +61,7 @@ var create = function (req, res, query) {
 
 	erreur = false
 	for(k = 0; k < query.sondage.length; k++) {
-		if(query.sondage[k] === "") {
+		if(query.sondage[k] === " ") {
 			erreur = true;
 		}
 	}
@@ -143,6 +143,13 @@ var create = function (req, res, query) {
 		marqueurs.sondage = query.sondage;
 		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces_sondage="+query.sondage;
 
+	}
+	marqueurs.inviter = "<p><h1> Voulez-vous inviter des membres du site à répondre à votre sondage ?</h1></p><br>"
+
+	for (i = 0; i < liste_membres.length; i++) {
+		if (liste_membres[i].id !== query.id) {
+		marqueurs.inviter += '<input type="checkbox" name="invitation" value="'+liste_membres[i].id+'">'+liste_membres[i].id+'<br>';
+		}
 	}
 
 	page = page.supplant(marqueurs);
