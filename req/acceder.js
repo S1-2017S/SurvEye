@@ -22,13 +22,14 @@ var trait = function(req,res,query) {
     contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
 
-	if(query.id === "{id}") {
+	if(query.sondage === query.acces_sondage) {
 	    page = fs.readFileSync('res/modele_accueil.html', 'utf-8');
 
 		marqueurs = {};
-		marqueurs.erreur = "";
+		marqueurs.erreur = "Veuillez vous connecter ou vous inscrire pour répondre au sondage.";
 		marqueurs.id = "";
-
+		marqueurs.sondage = query.sondage;
+		
 	}else if(contenu_fichier.etat === "open") {
 
         i = 0;

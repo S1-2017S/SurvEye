@@ -128,7 +128,7 @@ var create = function (req, res, query) {
 		marqueurs.confirm = "crée";
 		marqueurs.direction = "accueil membre";
 		marqueurs.sondage = query.sondage;
-		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir"
+		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces_sondage="+query.sondage;
 
 	}
 
