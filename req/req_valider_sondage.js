@@ -90,7 +90,7 @@ var valider = function (req, res, query) {
 		fs.writeFileSync("./json/"+query.id+"t.json", contenu_fichier, "utf-8");
 	}
 
-	marqueurs.inviter = "<p><h1> Voulez-vous inviter des membres du site à répondre à votre sondage ?</h1></p><br>"
+	marqueurs.inviter = "<p><h1> Voulez-vous inviter des membres du site à répondre à votre sondage ?</h1></p>"
 
 	for (i = 0; i < liste_membres.length; i++) {
 		if (liste_membres[i].id !== query.id) {
