@@ -53,7 +53,31 @@ Affichage dépendant du résultat de la recherche
 		marqueurs.id = query.id;
 		marqueurs.sondage = query.sondage;
 		page = page.supplant(marqueurs);
-
+	}
+	contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "UTF-8");
+	contenu_fichier = JSON.parse(contenu_fichier);
+	
+	if(contenu_fichier.etat === "closed") {
+	    page = fs.readFileSync("./res/res_resultats_sondages.html", "utf-8");
+		
+		marqueurs = {};
+		marqueurs.id = query.id;
+		marqueurs.sondage = query.sondage;
+		marqueurs.message = "Ce sondage est fermé.";
+		nb_reponses = 0;
+		marqueurs.results = "";
+		
+		for(i = 0; i < contenu_fichier.answers.length; i++) {
+			marqueurs.results += "<h2>"+contenu_fichier.questions[i]+"</h2><br>";
+			for(x = 1; x < contenu_fichier.answers[i].length; x++) {
+				if(contenu_fichier.answers[i][x] !== 0) {
+					nb_reponses += contenu_fichier.answers[i][x];
+				}
+			}
+			for(x = 0; x < contenu_fichier.answers[i].length; x++) {
+				marqueurs.results += contenu_fichier.reponses[i][x]+"<img src='./css/barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%><br>";
+			}
+		}
 	} else if(query.sondage !== "{sondage}") {
 
 		marqueurs = {};
@@ -64,8 +88,8 @@ Affichage dépendant du résultat de la recherche
 
 		contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "UTF-8");
 		contenu_fichier = JSON.parse(contenu_fichier);
-		
-		i = 0; 
+
+		i = 0;
 		trouve = false;
 		while(trouve === false && i < contenu_fichier.ids.length) {
 			if(contenu_fichier.ids[i] === query.id) {
@@ -94,7 +118,6 @@ Affichage dépendant du résultat de la recherche
 				marqueurs.results += contenu_fichier.reponses[i][x]+"<img src='./css/barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%><br>";
 				}
 			}
-			page = page.supplant(marqueurs);
 		
 		} else if(trouve === false) {
 			
@@ -127,7 +150,7 @@ Affichage dépendant du résultat de la recherche
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("json/profils.json", contenu_fichier, "UTF-8");
 		}
-		page = page.supplant(marqueurs);
+		
 	
 	} else {
 		page = fs.readFileSync('res/modele_accueil_membre.html', 'UTF-8');
@@ -135,9 +158,10 @@ Affichage dépendant du résultat de la recherche
 		marqueurs = {};
 		marqueurs.id = query.id;
 		marqueurs.sondage = query.sondage;
-		page = page.supplant(marqueurs);
 	}
 
+	page = page.supplant(marqueurs);
+	
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write(page);
 	res.end();
