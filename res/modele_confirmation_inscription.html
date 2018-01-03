@@ -15,6 +15,10 @@ Notez bien votre pseudo : <em>{id}</em> et votre password : <em>{password}</em>
 Cliquez sur le lien ci-dessous pour revenir à la page d'accueil pour vous identifier.
 </p>
 
-<a href="/">Revenir à la page d'accueil</a>
+	<form action="/req_retour_accueil" method="GET">
+		<input type="submit" name="revenir" value="Page d'accueil">
+		<input type="hidden" name="sondage" value={sondage}><p>
+		<input type="hidden" name="id" value={id}>
+	</form>
 
 </html>

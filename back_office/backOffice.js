@@ -13,13 +13,13 @@ var querystring = require("querystring");
 //-------------------------------------------------------------------------
 // DECLARATION DES DIFFERENTS MODULES CORRESPONDANT A CHAQUE ACTION
 //-------------------------------------------------------------------------
-var req_consulter_sondages = require("./req_consulter_sondages.js");
-var req_static = require("./req_static.js");
-var req_erreur = require("./req_erreur.js");
-var req_deconnexion = require("./req_deconnexion.js");
-var req_confirm_delete = require("./req_confirm_delete");
+var req_consulter_sondages = require("../req/req_consulter_sondages.js");
+var req_static = require("../req/req_static.js");
+var req_erreur = require("../req/req_erreur.js");
+var req_deconnexion = require("../req/req_deconnexion.js");
+var req_confirm_delete = require("../req/req_confirm_delete");
 var web_masterisation = require("./req_web_masterisation.js");
-var web_delete = require("./web_delete.js");
+var web_delete = require("../req/web_delete.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE

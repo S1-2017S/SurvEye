@@ -21,7 +21,7 @@ Affichage de la page d'accueil membre
 
 	marqueurs = {};
 	marqueurs.id = query.id;
-
+	
 	page = page.supplant(marqueurs);
 
     res.writeHead(200, {'Content-Type': 'text/html'});

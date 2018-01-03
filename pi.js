@@ -40,8 +40,9 @@ var req_editer_sondage = require("./req/req_editer_sondage.js");
 var req_preferences = require("./req/req_preferences.js");
 var req_nouveau_mdp = require("./req/req_nouveau_mdp.js");
 var req_retour_creation_sondage = require("./req/req_retour_creation_sondage.js");
-var req_inviter = require("./req/req_inviter.js");
 var voir_url = require("./req/req_url.js");
+var req_retour_accueil = require("./req/req_retour_accueil.js");
+
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -90,6 +91,8 @@ var traite_requete = function (req, res) {
 					ouvrir(req, res, query);
 				}else if(query.bouton === "Supprimer") {
 					del(req, res, query);
+				}else if(query.bouton === "URL") {
+					voir_url(req, res, query);
 				}
 				break;
 			case '/req_editer_sondage' :
@@ -99,12 +102,10 @@ var traite_requete = function (req, res) {
 					supprimer(req, res, query);
 				}else if (query.p === "Valider sondage") {
 					req_valider_sondage(req, res, query);
-				}else if(query.confirmer === "Confirmer") {
-					req_confirmer_creation_sondage(req, res, query);
 				}
 				break;
-			case '/req_inviter' :
-				req_inviter(req,res,query);
+			case '/req_confirmer_creation_sondage' :
+				req_confirmer_creation_sondage(req, res, query);
 				break;
 			case '/req_historique' :
 				req_historique(req, res, query);
@@ -135,6 +136,9 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_retour_creation_sondage':
 				req_retour_creation_sondage(req, res, query);
+				break;
+			case '/req_retour_accueil':
+				req_retour_accueil(req, res, query);
 				break;
 			default:
 				req_static(req, res, query);

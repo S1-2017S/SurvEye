@@ -19,11 +19,15 @@ var create = function (req, res, query) {
 	var liste;
 	var fichier_sondage;
 	var erreur;
+	var liste_membres;
 
 	/*
 	Vérification si l'id du user et du nom du sondage existent dans profils.json
 	*/
 	
+	liste_membres = fs.readFileSync("./json/membres.json","utf-8");
+	liste_membres = JSON.parse(liste_membres);
+
 	contenu_fichier = fs.readFileSync("./json/profils.json", "UTF-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 
@@ -46,7 +50,6 @@ var create = function (req, res, query) {
 		liste = JSON.parse(liste);
 		j = 0;
 		trouve = false;
-		console.log(liste[j]);
 
 		while(trouve === false && j < liste.length) {
 			if(liste[j] === query.sondage) {
@@ -54,25 +57,16 @@ var create = function (req, res, query) {
 			}else j++;
 		}
 		
-		//On vérifie qu'il si il y a des espaces de le nom du sondage
+		//On vérifie qu'il si il y a des espaces de le nom du sondage et on les remplace par '_'
 
-	erreur = false
 	for(k = 0; k < query.sondage.length; k++) {
 		if(query.sondage[k] === " ") {
-			erreur = true;
+			query.sondage = query.sondage.replace(" ","_");
 		}
 	}
 	
-	if(erreur === true) {
 	
-	//On construit la page d'erreur
-
-		page = fs.readFileSync("./res/res_valider_sondage.html","utf-8");
-		marqueurs = {};
-		marqueurs.id = query.id;
-		marqueurs.erreur = "Erreur : les espaces ne sont pas autorisés dans le nom du sondage.";
-	
-	}else  if (query.sondage === "") {
+	if (query.sondage === "") {
 		page = fs.readFileSync("./res/res_valider_sondage.html","utf-8");
 		marqueurs = {};
 		marqueurs.id = query.id;
@@ -120,6 +114,16 @@ var create = function (req, res, query) {
 		fichier_sondage = JSON.stringify(fichier_sondage);		
 		fs.writeFileSync("./json/"+query.sondage+".json", fichier_sondage, "utf-8");
 		
+		//invitation des membres demandés par l'utilisateur
+		/*
+		for (i = 0; i < query.invitation.length; i++) {
+			for (j = 0; j < contenu_fichier.length; j++) {
+				if (query.invitation[i] === contenu_fichier[j].id) {
+					contenu_fichier[j].sondageguest.push(query.sondage);
+				}				
+			}		
+		}
+		*/
 		//On construit la page de confirmation
 
 		page = fs.readFileSync("./res/res_confirmation_creation.html","utf-8");
@@ -128,8 +132,15 @@ var create = function (req, res, query) {
 		marqueurs.confirm = "crée";
 		marqueurs.direction = "accueil membre";
 		marqueurs.sondage = query.sondage;
-		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir"
+		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces_sondage="+query.sondage;
 
+	}
+	marqueurs.inviter = "<p><h1> Voulez-vous inviter des membres du site à répondre à votre sondage ?</h1></p>"
+
+	for (i = 0; i < liste_membres.length; i++) {
+		if (liste_membres[i].id !== query.id) {
+		marqueurs.inviter += '<input type="checkbox" name="invitation" value="'+liste_membres[i].id+'">'+liste_membres[i].id+'<br>';
+		}
 	}
 
 	page = page.supplant(marqueurs);

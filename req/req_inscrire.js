@@ -32,16 +32,19 @@ var trait = function (req, res, query) {
 	listeProfils = JSON.parse(profils);
 	
 	marqueurs = {};
+	marqueurs.sondage = query.sondage;
 
 	if(query.id === "") {
 		page = fs.readFileSync('res/modele_formulaire_inscription.html', 'utf-8');
 		marqueurs.erreur = "Le pseudo est vide !";	
 		marqueurs.id = query.id;
+		marqueurs.sondage = query.sondage;
 		page = page.supplant(marqueurs);
 	} else if (query.password === "") {
 		page = fs.readFileSync('res/modele_formulaire_inscription.html', 'utf-8');
 		marqueurs.erreur = "le mot de passe est vide !";
 		marqueurs.id = query.id;
+		marqueurs.sondage = query.sondage;
 		page = page.supplant(marqueurs);
 	} else {
 
@@ -86,6 +89,7 @@ var trait = function (req, res, query) {
 			marqueurs = {};
 			marqueurs.erreur = "ERREUR : confirmation invalide !";
 			marqueurs.id = query.id;
+			marqueurs.sondage = query.sondage;
 			page = page.supplant(marqueurs);
 		} 
 		
@@ -96,6 +100,7 @@ var trait = function (req, res, query) {
 			marqueurs = {};
 			marqueurs.id = query.id;
 			marqueurs.erreur = "ERREUR : ce compte existe déjà";
+			marqueurs.sondage = query.sondage;
 			page = page.supplant(marqueurs);
 	} 
 
@@ -106,6 +111,7 @@ var trait = function (req, res, query) {
 		marqueurs = {};
 		marqueurs.id = query.id;
 		marqueurs.password = query.password;
+		marqueurs.sondage = query.sondage;
 		page = page.supplant(marqueurs);
 	}
 }

@@ -20,7 +20,6 @@ var inviter = function (req,res,query) {
     
     membres = fs.readFileSync("./json/membres.json","utf-8");
     membres = JSON.parse(membres);
-
     marqueurs = {};
     marqueurs.membre = "";
 

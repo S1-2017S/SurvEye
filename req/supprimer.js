@@ -21,6 +21,7 @@ var trait = function(req,res,query) {
 
 	contenu_fichier.questions.splice(Number(query.numero), 1);
 	contenu_fichier.reponses.splice(Number(query.numero), 1);
+	contenu_fichier.answers.splice(Number(query.numero), 1);
 	marqueurs = {};
 	marqueurs.id = query.id;
 	marqueurs.erreurQ = "";

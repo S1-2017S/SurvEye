@@ -20,8 +20,9 @@ var trait = function (req, res, query) {
 	marqueurs = {};
 	marqueurs.erreur = "";
 	marqueurs.id = "";
+	marqueurs.sondage = query.sondage;
 	page = page.supplant(marqueurs);
-
+	
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write(page);
 	res.end();
