@@ -38,13 +38,11 @@ var trait = function (req, res, query) {
 		page = fs.readFileSync('res/modele_formulaire_inscription.html', 'utf-8');
 		marqueurs.erreur = "Le pseudo est vide !";	
 		marqueurs.id = query.id;
-		marqueurs.sondage = query.sondage;
 		page = page.supplant(marqueurs);
 	} else if (query.password === "") {
 		page = fs.readFileSync('res/modele_formulaire_inscription.html', 'utf-8');
 		marqueurs.erreur = "le mot de passe est vide !";
 		marqueurs.id = query.id;
-		marqueurs.sondage = query.sondage;
 		page = page.supplant(marqueurs);
 	} else {
 
@@ -89,7 +87,6 @@ var trait = function (req, res, query) {
 			marqueurs = {};
 			marqueurs.erreur = "ERREUR : confirmation invalide !";
 			marqueurs.id = query.id;
-			marqueurs.sondage = query.sondage;
 			page = page.supplant(marqueurs);
 		} 
 		
@@ -100,7 +97,6 @@ var trait = function (req, res, query) {
 			marqueurs = {};
 			marqueurs.id = query.id;
 			marqueurs.erreur = "ERREUR : ce compte existe déjà";
-			marqueurs.sondage = query.sondage;
 			page = page.supplant(marqueurs);
 	} 
 
@@ -111,13 +107,19 @@ var trait = function (req, res, query) {
 		marqueurs = {};
 		marqueurs.id = query.id;
 		marqueurs.password = query.password;
-		marqueurs.sondage = query.sondage;
 		page = page.supplant(marqueurs);
 	}
 }
+	if(query.acces === "invite") {
+	    marqueurs.hidden ="<input type='hidden' name=sondage value={sondage}><input type=hidden name=acces value=invite>";
+		marqueurs.sondage = query.sondage;
+		page = page.supplant(marqueurs);
+	}else {
+		marqueurs.hidden ="";
+	}
 
+	page = page.supplant(marqueurs);
 	
-
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write(page);
 	res.end();

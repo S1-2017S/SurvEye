@@ -57,7 +57,7 @@ var create = function (req, res, query) {
 			}else j++;
 		}
 		
-		//On vérifie qu'il si il y a des espaces de le nom du sondage et on les remplace par '_'
+		//On vérifie si il y a des espaces de le nom du sondage et on les remplace par '_'
 
 	for(k = 0; k < query.sondage.length; k++) {
 		if(query.sondage[k] === " ") {
@@ -132,7 +132,7 @@ var create = function (req, res, query) {
 		marqueurs.confirm = "crée";
 		marqueurs.direction = "accueil membre";
 		marqueurs.sondage = query.sondage;
-		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces_sondage="+query.sondage;
+		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces=invite";
 
 	}
 	marqueurs.inviter = "<p><h1> Voulez-vous inviter des membres du site à répondre à votre sondage ?</h1></p>"

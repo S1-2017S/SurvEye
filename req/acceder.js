@@ -22,12 +22,14 @@ var trait = function(req,res,query) {
     contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "utf-8");
     contenu_fichier = JSON.parse(contenu_fichier);
 
-	if(query.sondage === query.acces_sondage) {
+	if(query.acces === "invite") {
 	    page = fs.readFileSync('res/modele_accueil.html', 'utf-8');
 
 		marqueurs = {};
 		marqueurs.erreur = "Veuillez vous connecter ou vous inscrire pour répondre au sondage.";
 		marqueurs.id = "";
+		marqueurs.hidden = "<input type=hidden name=sondage value={sondage}><input type=hidden name=acces value=invite>"
+		page = page.supplant(marqueurs);
 		marqueurs.sondage = query.sondage;
 		
 	}else if(contenu_fichier.etat === "open") {
@@ -47,7 +49,7 @@ var trait = function(req,res,query) {
             marqueurs = {};
             marqueurs.id = query.id;
  			marqueurs.message = "Vous avez déjà répondu à ce sondage.";
- 			marqueurs.sondage = "";
+			marqueurs.hidden = ""
 			marqueurs.results = "";
             nb_reponses = 0;
             for(i = 0; i < contenu_fichier.answers.length; i++) {
@@ -67,9 +69,11 @@ var trait = function(req,res,query) {
             page = fs.readFileSync("./res/res_reponse_sondage.html", "utf-8");
             marqueurs = {};
             marqueurs.id = query.id;
-            marqueurs.questions = "";
  			marqueurs.message = "";
-            marqueurs.sondage = query.sondage;
+			marqueurs.hidden = "<input type=hidden name=sondage value={sondage}><input type=hidden name=acces value=invite>"
+			page = page.supplant(marqueurs);
+			marqueurs.questions = "";
+			marqueurs.sondage = query.sondage;
             for(i = 0; i < contenu_fichier.questions.length; i++) {
                 marqueurs.questions += "<h2>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</h2><br>"
                 for(x = 0; x < contenu_fichier.reponses[i].length; x++) {
@@ -81,6 +85,8 @@ var trait = function(req,res,query) {
         page = fs.readFileSync("./res/res_resultats_sondages.html", "utf-8");
         marqueurs = {};
         marqueurs.id = query.id;
+		marqueurs.hidden = ""
+		page = page.supplant(marqueurs);
         marqueurs.sondage = query.sondage;
 		marqueurs.message = "Ce sondage est fermé.";
         nb_reponses = 0;

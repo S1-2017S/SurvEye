@@ -20,9 +20,16 @@ var retour = function (req, res, query) {
 	page = fs.readFileSync("res/modele_accueil.html", "utf-8");
 
 	marqueurs = {};
-	marqueurs.id = query.id;
+	marqueurs.id = "";
 	marqueurs.sondage = query.sondage;
 	marqueurs.erreur = "";
+	    if(query.acces === "invite") {
+			marqueurs.hidden ="<input type='hidden' name=sondage value={sondage}><input type=hidden name=acces value=invite>";
+			marqueurs.sondage = query.sondage;
+			page = page.supplant(marqueurs);
+		}else {
+			marqueurs.hidden ="";
+		}
 
 	page = page.supplant(marqueurs);
 

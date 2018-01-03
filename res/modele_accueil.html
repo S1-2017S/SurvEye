@@ -23,8 +23,8 @@
                     Pseudo : <input class="form-control"type="text" name="id" value="{id}"> 
                     <br/>
                     Mot de passe : <input class="form-control"type="password" name="password" value="">
-					<input type="hidden" name="sondage" value="{sondage}">
-                    <br/>
+                    {hidden}
+					<br/>
 	    </div>
 	    <div class="row col-md-">
                     <input class="btn btn-primary" type="submit" name="action" value="Se connecter">
@@ -34,8 +34,8 @@
 		 
                 <form action="/req_afficher_formulaire_inscription" method="GET">
                     <button class="btn" name="action" value="creer">Créer compte</button>
-					<input type="hidden" name="sondage" value="{sondage}">
-                </form>  
+                	{hidden}
+				</form>  
 
             </div>
         </div>
