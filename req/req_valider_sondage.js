@@ -73,6 +73,10 @@ var valider = function (req, res, query) {
 			marqueurs.indice = 0
 			query.numero = Number(query.numero);
 		}
+	} else if(compteur === 0 && query.q === "") {
+		page = fs.readFileSync('res/res_valider_sondage.html', 'UTF-8');
+		contenu_fichier = JSON.stringify(contenu_fichier);
+        fs.writeFileSync("./json/"+query.id+"t.json", contenu_fichier, "utf-8");
 	} else {
     	page = fs.readFileSync('res/res_valider_sondage.html', 'UTF-8');
 		contenu_fichier.questions.push(question);
