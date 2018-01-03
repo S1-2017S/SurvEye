@@ -60,7 +60,23 @@ Affichage dépendant du résultat de la recherche
 		page = page.supplant(marqueurs);
 	
 	} else if(query.acces === "invite") {
-		
+		contenu_fichier = fs.readFileSync('json/liste.json', 'UTF-8');
+		contenu_fichier = JSON.parse(contenu_fichier);
+		trouve = false
+		for(i = 0; i < contenu_fichier.length; i++) {
+			if(contenu_fichier[i] === query.sondage) {
+				trouve = true
+			}
+		}
+		if(trouve === false) {
+			page = fs.readFileSync("./res/res_resultats_sondages.html", "utf-8");
+			marqueurs = {};
+			marqueurs.message = "Ce sondage a été supprimé"
+			marqueurs.id = query.id
+			marqueurs.hidden = "";
+			marqueurs.results = "";
+		}else if(trouve === true) {
+	
 	contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "UTF-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 	
@@ -159,6 +175,7 @@ Affichage dépendant du résultat de la recherche
 		fs.writeFileSync("json/profils.json", contenu_fichier, "UTF-8");
 		}
 		
+	}
 	}
 	} else {
 		page = fs.readFileSync('res/modele_accueil_membre.html', 'UTF-8');
