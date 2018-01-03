@@ -53,7 +53,9 @@ Affichage dépendant du résultat de la recherche
 		marqueurs.id = query.id;
 		marqueurs.sondage = query.sondage;
 		page = page.supplant(marqueurs);
-	}
+	
+	} else if(query.sondage !== "{sondage}") {
+		
 	contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "UTF-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 	
@@ -78,8 +80,7 @@ Affichage dépendant du résultat de la recherche
 				marqueurs.results += contenu_fichier.reponses[i][x]+"<img src='./css/barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%><br>";
 			}
 		}
-	} else if(query.sondage !== "{sondage}") {
-
+	} else {
 		marqueurs = {};
 		marqueurs.id = query.id;
 		marqueurs.questions = "";
@@ -151,7 +152,7 @@ Affichage dépendant du résultat de la recherche
 		fs.writeFileSync("json/profils.json", contenu_fichier, "UTF-8");
 		}
 		
-	
+	}
 	} else {
 		page = fs.readFileSync('res/modele_accueil_membre.html', 'UTF-8');
 
