@@ -57,7 +57,7 @@ var create = function (req, res, query) {
 			}else j++;
 		}
 		
-		//On vérifie qu'il si il y a des espaces de le nom du sondage et on les remplace par '_'
+		//On vérifie si il y a des espaces de le nom du sondage et on les remplace par '_'
 
 	for(k = 0; k < query.sondage.length; k++) {
 		if(query.sondage[k] === " ") {
@@ -98,8 +98,6 @@ var create = function (req, res, query) {
 		//On enregistre le sondage dans ceux de l'user
 		
 		contenu_fichier[i].sondageuser.push(query.sondage);
-		contenu_fichier = JSON.stringify(contenu_fichier);
-		fs.writeFileSync("./json/profils.json",contenu_fichier,"utf-8");
 
 		//On enregistre le nom du sondage dans la base de données
 
@@ -115,7 +113,9 @@ var create = function (req, res, query) {
 		fs.writeFileSync("./json/"+query.sondage+".json", fichier_sondage, "utf-8");
 		
 		//invitation des membres demandés par l'utilisateur
-		/*
+		
+		console.log(query.invitation)
+
 		for (i = 0; i < query.invitation.length; i++) {
 			for (j = 0; j < contenu_fichier.length; j++) {
 				if (query.invitation[i] === contenu_fichier[j].id) {
@@ -123,7 +123,10 @@ var create = function (req, res, query) {
 				}				
 			}		
 		}
-		*/
+	
+		contenu_fichier = JSON.stringify(contenu_fichier);
+		fs.writeFileSync("./json/profils.json",contenu_fichier,"utf-8");
+		
 		//On construit la page de confirmation
 
 		page = fs.readFileSync("./res/res_confirmation_creation.html","utf-8");
@@ -132,7 +135,7 @@ var create = function (req, res, query) {
 		marqueurs.confirm = "crée";
 		marqueurs.direction = "accueil membre";
 		marqueurs.sondage = query.sondage;
-		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces_sondage="+query.sondage;
+		marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces=invite";
 
 	}
 	marqueurs.inviter = "<p><h1> Voulez-vous inviter des membres du site à répondre à votre sondage ?</h1></p>"

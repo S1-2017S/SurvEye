@@ -16,7 +16,7 @@ var trait = function(req,res,query) {
 
 	marqueurs = {};
 	marqueurs.id = query.id;
-	marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces_sondage="+query.sondage;
+	marqueurs.url = "http://localhost:5000/req_traiter_sondage?&sondage="+query.sondage+"&bouton=Voir&acces=invite";
 	
 	page = page.supplant(marqueurs);
 	res.writeHead(200, {'Content-Type': 'text/html'});

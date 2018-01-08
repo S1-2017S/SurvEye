@@ -23,10 +23,10 @@ var connexion = function (req, res, query) {
 	var trouve;
 	var x;
 	var nb_reponses;
+	var chaine
 
 	contenu_fichier = fs.readFileSync("json/membres.json", 'utf-8');
 	listeMembres = JSON.parse(contenu_fichier);
-
 /*
 Recherche de l'ID du user
 */
@@ -51,9 +51,32 @@ Affichage dépendant du résultat de la recherche
 		marqueurs = {};
 		marqueurs.erreur = "ERREUR : compte ou mot de passe incorrect";
 		marqueurs.id = query.id;
-		marqueurs.sondage = query.sondage;
+		marqueurs.hidden = "";
+		if(query.acces === "invite") {
+			marqueurs.hidden = "<input type=hidden name=sondage value={sondage}><input type=hidden name=acces value=invite>"
+			page = page.supplant(marqueurs);
+			marqueurs.sondage = query.sondage;
+		}
 		page = page.supplant(marqueurs);
-	}
+	
+	} else if(query.acces === "invite") {
+		contenu_fichier = fs.readFileSync('json/liste.json', 'UTF-8');
+		contenu_fichier = JSON.parse(contenu_fichier);
+		trouve = false
+		for(i = 0; i < contenu_fichier.length; i++) {
+			if(contenu_fichier[i] === query.sondage) {
+				trouve = true
+			}
+		}
+		if(trouve === false) {
+			page = fs.readFileSync("./res/res_resultats_sondages.html", "utf-8");
+			marqueurs = {};
+			marqueurs.message = "Ce sondage a été supprimé"
+			marqueurs.id = query.id
+			marqueurs.hidden = "";
+			marqueurs.results = "";
+		}else if(trouve === true) {
+	
 	contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "UTF-8");
 	contenu_fichier = JSON.parse(contenu_fichier);
 	
@@ -62,7 +85,7 @@ Affichage dépendant du résultat de la recherche
 		
 		marqueurs = {};
 		marqueurs.id = query.id;
-		marqueurs.sondage = query.sondage;
+		marqueurs.hidden = ""
 		marqueurs.message = "Ce sondage est fermé.";
 		nb_reponses = 0;
 		marqueurs.results = "";
@@ -78,14 +101,13 @@ Affichage dépendant du résultat de la recherche
 				marqueurs.results += contenu_fichier.reponses[i][x]+"<img src='./css/barre_histo.PNG' style=' height : 20px; width : "+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%' alt="+(contenu_fichier.answers[i][x]/nb_reponses)*100+"%><br>";
 			}
 		}
-	} else if(query.sondage !== "{sondage}") {
-
+	} else {
 		marqueurs = {};
 		marqueurs.id = query.id;
-		marqueurs.questions = "";
+		marqueurs.queddstions = "";
 		marqueurs.message = "";
-		marqueurs.sondage = query.sondage;
-
+		marqueurs.hidden = "<input type=hidden name=sondage value={sondage}><input type=hidden name=acces value=invite>"
+		
 		contenu_fichier = fs.readFileSync("./json/"+query.sondage+".json", "UTF-8");
 		contenu_fichier = JSON.parse(contenu_fichier);
 
@@ -105,8 +127,8 @@ Affichage dépendant du résultat de la recherche
 			marqueurs.id = query.id;
 			marqueurs.message = "Vous avez déjà répondu à ce sondage.";
 			marqueurs.sondage = "";
-			marqueurs.results = "";
 			nb_reponses = 0;
+			marqueurs.results = "";
 			for(i = 0; i < contenu_fichier.answers.length; i++) {
 				marqueurs.results += "<h2>"+contenu_fichier.questions[i]+"</h2><br>";
 				for(x = 0; x < contenu_fichier.answers[i].length; x++) {
@@ -122,7 +144,9 @@ Affichage dépendant du résultat de la recherche
 		} else if(trouve === false) {
 			
 			page = fs.readFileSync("./res/res_reponse_sondage.html", "utf-8");
-			
+			marqueurs.sondage = query.sondage;
+			page = page.supplant(marqueurs);
+			marqueurs.questions = "";
 			for(i = 0; i < contenu_fichier.questions.length; i++) {
 				marqueurs.questions += "<h2>Question "+(i+1)+" : "+contenu_fichier.questions[i]+"</h2><br>"
 				for(x = 0; x < contenu_fichier.reponses[i].length; x++) {
@@ -151,7 +175,8 @@ Affichage dépendant du résultat de la recherche
 		fs.writeFileSync("json/profils.json", contenu_fichier, "UTF-8");
 		}
 		
-	
+	}
+	}
 	} else {
 		page = fs.readFileSync('res/modele_accueil_membre.html', 'UTF-8');
 
@@ -159,7 +184,6 @@ Affichage dépendant du résultat de la recherche
 		marqueurs.id = query.id;
 		marqueurs.sondage = query.sondage;
 	}
-
 	page = page.supplant(marqueurs);
 	
 	res.writeHead(200, {'Content-Type': 'text/html'});

@@ -20,7 +20,14 @@ var trait = function (req, res, query) {
 	marqueurs = {};
 	marqueurs.erreur = "";
 	marqueurs.id = "";
-	marqueurs.sondage = query.sondage;
+	
+	if(query.acces === "invite") {
+		marqueurs.hidden ="<input type='hidden' name=sondage value={sondage}><input type=hidden name=acces value=invite>";
+		marqueurs.sondage = query.sondage;
+		page = page.supplant(marqueurs);
+	}else {
+		marqueurs.hidden ="";
+	}
 	page = page.supplant(marqueurs);
 	
 	res.writeHead(200, {'Content-Type': 'text/html'});

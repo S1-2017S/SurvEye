@@ -5,9 +5,9 @@
     </head>
     </p>
     <body>
-		{inviter}
-    	<h1>Entrez le nom de votre sondage :</h1>
         <form action="req_confirmer_creation_sondage" method="GET">
+			{inviter}
+    		<h1>Entrez le nom de votre sondage :</h1>
             <input type="textarea" name="sondage" value="">
             <input type="submit" name="confirmer" value="Confirmer">
             <input type="hidden" name="id" value="{id}">
