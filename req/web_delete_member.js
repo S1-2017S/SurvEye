@@ -5,11 +5,10 @@ var remedial = require("remedial");
 var web_delete_survey = function (req, res, query) {
 	var marqueurs;
 	var page;
-	var contenu_fichier;
+	var contenu_fichier; //contient la liste des membres
 	var i;
 	var j;
 	var k;
-	var sondage = String(query.sondage);
 	var trouve;
 	var liste;
 

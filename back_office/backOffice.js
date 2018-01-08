@@ -19,7 +19,8 @@ var req_erreur = require("../req/req_erreur.js");
 var req_deconnexion = require("../req/req_deconnexion.js");
 var req_confirm_delete = require("../req/req_confirm_delete");
 var web_masterisation = require("./req_web_masterisation.js");
-var web_delete = require("../req/web_delete.js");
+var web_delete_survey = require("../req/web_delete_survey.js");
+var web_delete_member = require("../req/web_delete_member.js");
 
 //-------------------------------------------------------------------------
 // FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
@@ -46,8 +47,10 @@ var traite_requete = function (req, res) {
                 web_masterisation(req, res, query);
             break;
 			case '/req_traiter_web' :
-				if (query.bouton === "Supprimer") {
-					web_delete(req, res, query);
+				if (query.survey === "Supprimer") {
+					web_delete_survey(req, res, query);
+				}else if (query.member === "Supprimer") {
+					web_delete_member(req, res, query);
 				}
 				break;
             default:

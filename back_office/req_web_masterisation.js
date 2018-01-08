@@ -10,17 +10,25 @@ var remedial = require('remedial');
 var web_masterisation = function (req, res, query) {
     var marqueurs;
     var page;
-    var contenu_fichier;
+    var sondages; //liste des sondages du site   
+    var membres; // liste des membres du site
     var i;
 
     page = fs.readFileSync("./back_office/res_sondages_web_master.html", "utf-8");
     marqueurs = {};
 
-    contenu_fichier = fs.readFileSync("./json/liste.json", "utf-8");
-    contenu_fichier = JSON.parse(contenu_fichier);
+    sondages = fs.readFileSync("./json/liste.json", "utf-8");
+    sondages = JSON.parse(sondages);
 
-    for (i = 0; i < contenu_fichier.length; i++) {
-        marqueurs.liste += "<option value="+contenu_fichier[i]+">"+contenu_fichier[i]+"</option>";
+    membres = fs.readFileSync("./json/membres.json", "utf-8");
+    membres = JSON.parse(membres);
+
+    for (i = 0; i < sondages.length; i++) {
+        marqueurs.liste += "<option value="+sondages[i]+">"+sondages[i]+"</option>";
+    }
+
+    for (i = 0; i < membres.length; i++) {
+        marqueurs.liste2 += "<option value="+membres[i]+">"+membres[i].id+"</option>";        
     }
 
     page = page.supplant(marqueurs);
