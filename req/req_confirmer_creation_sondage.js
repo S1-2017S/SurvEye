@@ -114,8 +114,7 @@ var create = function (req, res, query) {
 		
 		//invitation des membres demandés par l'utilisateur
 		
-		console.log(query.invitation)
-
+		if(query.invitation !== undefined) {
 		for (i = 0; i < query.invitation.length; i++) {
 			for (j = 0; j < contenu_fichier.length; j++) {
 				if (query.invitation[i] === contenu_fichier[j].id) {
@@ -123,7 +122,7 @@ var create = function (req, res, query) {
 				}				
 			}		
 		}
-	
+		}
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./json/profils.json",contenu_fichier,"utf-8");
 		
