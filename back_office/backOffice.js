@@ -44,7 +44,7 @@ var traite_requete = function (req, res) {
 		switch (pathname) {
 			case '/':
 			case '/req_web_masterisation':
-//                web_masterisation(req, res, query);
+                web_masterisation(req, res, query);
             	break;
 			case '/req_liste' :
 				req_liste(req, res, query);
@@ -57,14 +57,14 @@ var traite_requete = function (req, res) {
 				}
 				break;
             default:
-//				req_static(req, res, query);
+				req_static(req, res, query);
 				break;
 		}
 	} catch (e) {
 		console.log('Erreur : ' + e.stack);
 		console.log('Erreur : ' + e.message);
-		//console.trace();
-//		req_erreur(req, res, query);
+		console.trace();
+		req_erreur(req, res, query);
 	}
 };
 
