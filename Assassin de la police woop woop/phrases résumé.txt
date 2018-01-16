@@ -1,5 +1,5 @@
 --------------------------------
-SurvEye vous permet de créer et de répondre à des sondages.
+SurvEye vous permet de créer et partager des sondages.
 --------------------------------
 Plus précisement, SurvEye vous permet de créer des sondages sur votre compte.
 
