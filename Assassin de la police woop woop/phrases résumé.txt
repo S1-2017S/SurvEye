@@ -1,9 +1,9 @@
 --------------------------------
 SurvEye vous permet de créer et partager des sondages.
 --------------------------------
-Plus précisement, SurvEye vous permet de créer des sondages sur votre compte.
+Plus précisement, SurvEye vous permet de créer des sondages.
 
-Invitez des personnes de votre entourage à y répondre ou rendez le publique. 
+Invitez des personnes à y répondre ou rendez le publique. 
 
 Consultez les résultats immédiatement.
 
