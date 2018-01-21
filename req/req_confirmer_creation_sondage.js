@@ -20,6 +20,7 @@ var create = function (req, res, query) {
 	var fichier_sondage;
 	var erreur;
 	var liste_membres;
+	var invite;
 
 	/*
 	Vérification si l'id du user et du nom du sondage existent dans profils.json
@@ -115,13 +116,23 @@ var create = function (req, res, query) {
 		//invitation des membres demandés par l'utilisateur
 		
 		if(query.invitation !== undefined) {
-		for (i = 0; i < query.invitation.length; i++) {
-			for (j = 0; j < contenu_fichier.length; j++) {
-				if (query.invitation[i] === contenu_fichier[j].id) {
-					contenu_fichier[j].sondageguest.push(query.sondage);
-				}				
-			}		
-		}
+			invite = [];
+			invite.push(query.invitation);
+			if (query.invitation[0].length > 1) {
+				for (i = 0; i < query.invitation.length; i++) {
+					for (j = 0; j < contenu_fichier.length; j++) {
+						if (query.invitation[i] === contenu_fichier[j].id) {
+							contenu_fichier[j].sondageguest.push(query.sondage);
+						}				
+					}		
+				}
+			} else if (query.invitation[0].length === 1) {
+				for (i = 0; i < contenu_fichier.length; i++) {
+					if (invite[0] === contenu_fichier[i].id) {
+						contenu_fichier[i].sondageguest.push(query.sondage);
+					}
+				}
+			}
 		}
 		contenu_fichier = JSON.stringify(contenu_fichier);
 		fs.writeFileSync("./json/profils.json",contenu_fichier,"utf-8");
