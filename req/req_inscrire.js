@@ -39,6 +39,11 @@ var trait = function (req, res, query) {
 		marqueurs.erreur = "Le pseudo est vide !";	
 		marqueurs.id = query.id;
 		page = page.supplant(marqueurs);
+	} else if (query.id.length < 3) {
+		page = fs.readFileSync('res/modele_formulaire_inscription.html', 'utf-8');
+		marqueurs.erreur = "Le pseudo doit avoir au moins 3 caractères !";
+		marqueurs.id = "";
+		page = page.supplant(marqueurs);
 	} else if (query.password === "") {
 		page = fs.readFileSync('res/modele_formulaire_inscription.html', 'utf-8');
 		marqueurs.erreur = "le mot de passe est vide !";
@@ -113,6 +118,7 @@ var trait = function (req, res, query) {
 	if(query.acces === "invite") {
 	    marqueurs.hidden ="<input type='hidden' name=sondage value={sondage}><input type=hidden name=acces value=invite>";
 		marqueurs.sondage = query.sondage;
+		marqueurs.id = query.id;
 		page = page.supplant(marqueurs);
 	}else {
 		marqueurs.hidden ="";
